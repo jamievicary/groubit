@@ -1,8 +1,8 @@
 const int zeroLED = 12;
 const int oneLED  = 11;
 const int activityLED =13;
-//const int POut = 0;  //Output Pin for tick
-// const int PIn = 1;  //Input Pin for tick
+const int POut = 0;  //Output Pin for tick
+const int PIn = 1;  //Input Pin for tick
 const int swapPin = 2;
 const int readPin = 4;
 const int phasePin= 3;
