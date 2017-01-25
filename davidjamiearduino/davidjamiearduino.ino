@@ -7,6 +7,7 @@ const int swapPin = 2;
 const int readPin = 4;
 const int phasePin= 3;
 const int tickPin = 5;  //Button Pin for tick
+const bool debug= false;
 
 // variables will change:
 int internalState = 0;         // variable for reading the pushbutton status
@@ -81,6 +82,7 @@ void setup() {
   randomSeed(analogRead(0));
   internalState = 0;
   logicalState = random(0,2);
+  if (debug==true) Serial.begin(9600);
 }
 
 int old_read_state=LOW;
@@ -122,6 +124,13 @@ void loop() {
     //else tick_up();
   }
 
+  if(debug==true) {
+    Serial.print("("); 
+    Serial.print(logicalState);
+    Serial.print(","); 
+    Serial.print(internalState);
+    Serial.println(")");
+  }
   // Delay a little bit to avoid bouncing
   delay(50);
 
