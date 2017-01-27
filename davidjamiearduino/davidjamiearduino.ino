@@ -1,8 +1,8 @@
 const int zeroLED = 12;
 const int oneLED  = 11;
 const int activityLED =13;
-const int POut = 0;  //Output Pin for tick
-const int PIn = 1;  //Input Pin for tick
+const int POut = 9;  //Output Pin for tick
+const int PIn = 8;  //Input Pin for tick
 const int swapPin = 2;
 const int readPin = 4;
 const int phasePin= 3;
@@ -13,7 +13,7 @@ const bool debug= false;
 int internalState = 0;         // variable for reading the pushbutton status
 int logicalState = 0; 
 
-
+int counter=0;
 void read_down() {
     // turn LED on:
     internalState=random(0,2);
@@ -49,6 +49,7 @@ void tick_up(){
 }
 
 void tick_down(){
+  if(debug==true)Serial.println("tick_down");
   digitalWrite(POut,HIGH);
   int PIn_state = LOW;
   while (digitalRead(tickPin)==HIGH){
@@ -57,14 +58,21 @@ void tick_down(){
     else {
       delay(100);
       digitalWrite(POut,logicalState==0 ? LOW : HIGH);
+      if(debug==true){
+        Serial.print("Sending ");
+        Serial.println(logicalState==0 ? "LOW" : "HIGH");}
       delay(50);
-      PIn_state==digitalRead(PIn);
-      if (PIn_state==HIGH) internalState==(internalState+1)%2;
+      PIn_state=digitalRead(PIn);
+      if(debug==true){
+        Serial.print("Other Arduino:");
+        Serial.println(PIn_state == HIGH ? 1 : 0);}
+      if (PIn_state==HIGH) internalState=(internalState+1)%2;
       delay(50);
       break;
     }
-    digitalWrite(POut,LOW);
   }
+  if(debug==true)Serial.println("tick_down exit");
+  digitalWrite(POut,LOW);
 }
 
 void setup() {
@@ -72,8 +80,8 @@ void setup() {
   pinMode(zeroLED, OUTPUT);
   pinMode(oneLED, OUTPUT);
   pinMode(activityLED, OUTPUT);
-  // pinMode(POut,OUTPUT);
-  // pinMODE(PIn, INPUT);
+  pinMode(POut,OUTPUT);
+  pinMode(PIn, INPUT);
   // initialize the pushbutton pin as an input:
   pinMode(swapPin, INPUT);
   pinMode(readPin, INPUT);
@@ -120,16 +128,19 @@ void loop() {
   }
 
   if (tick_state != old_tick_state) {
-    //if (tick_state == HIGH) tick_down();
-    //else tick_up();
+    if (tick_state == HIGH) tick_down();
+    else tick_up();
   }
 
   if(debug==true) {
+    Serial.print(counter);
+    Serial.print(". ");
     Serial.print("("); 
     Serial.print(logicalState);
     Serial.print(","); 
     Serial.print(internalState);
     Serial.println(")");
+    counter++;
   }
   // Delay a little bit to avoid bouncing
   delay(50);
