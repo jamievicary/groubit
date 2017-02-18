@@ -1,12 +1,12 @@
 const int zeroLED = 12;
 const int oneLED  = 11;
 const int activityLED =13;
-const int TickOut = 9;  //Output Pin for tick
-const int TickIn = 8;  //Input Pin for tick
-const int buttonSwap = 2;
-const int buttonRead = 4;
-const int buttonTick = 5;  //Button Pin for tick
-const int buttonError= 3;
+const int POut = 9;  //Output Pin for tick
+const int PIn = 8;  //Input Pin for tick
+const int swapPin = 2;
+const int readPin = 4;
+const int phasePin= 3;
+const int tickPin = 5;  //Button Pin for tick
 const bool debug= false;
 
 // variables will change:
@@ -29,10 +29,10 @@ void read_up() {
   digitalWrite(zeroLED, LOW);
 }
 
-void error_down() {
-  internalState = (internalState + 1) % 2;
+void phase_down() {
+  internalState = (internalState + logicalState) % 2;
 }
-void error_up() {
+void phase_up() {
   // Do nothing
 }
 void swap_down() {
@@ -45,34 +45,34 @@ void swap_up() {
 }
 
 void tick_up(){
-  digitalWrite(TickOut,LOW);
+  digitalWrite(POut,LOW);
 }
 
 void tick_down(){
   if(debug==true)Serial.println("tick_down");
-  digitalWrite(TickOut,HIGH);
-  int TickIn_state = LOW;
-  while (digitalRead(buttonTick)==LOW){
-    TickIn_state=digitalRead(TickIn);
-    if (TickIn_state==LOW) delay(10);
+  digitalWrite(POut,HIGH);
+  int PIn_state = LOW;
+  while (digitalRead(tickPin)==HIGH){
+    PIn_state=digitalRead(PIn);
+    if (PIn_state==LOW) delay(10);
     else {
       delay(100);
-      digitalWrite(TickOut,logicalState==0 ? LOW : HIGH);
+      digitalWrite(POut,logicalState==0 ? LOW : HIGH);
       if(debug==true){
         Serial.print("Sending ");
         Serial.println(logicalState==0 ? "LOW" : "HIGH");}
       delay(50);
-      TickIn_state=digitalRead(TickIn);
+      PIn_state=digitalRead(PIn);
       if(debug==true){
         Serial.print("Other Arduino:");
-        Serial.println(TickIn_state == HIGH ? 1 : 0);}
-      if (TickIn_state==HIGH) internalState=(internalState+1)%2;
+        Serial.println(PIn_state == HIGH ? 1 : 0);}
+      if (PIn_state==HIGH) internalState=(internalState+1)%2;
       delay(50);
       break;
     }
   }
   if(debug==true)Serial.println("tick_down exit");
-  digitalWrite(TickOut,LOW);
+  digitalWrite(POut,LOW);
 }
 
 void setup() {
@@ -80,13 +80,13 @@ void setup() {
   pinMode(zeroLED, OUTPUT);
   pinMode(oneLED, OUTPUT);
   pinMode(activityLED, OUTPUT);
-  pinMode(TickOut,OUTPUT);
-  pinMode(TickIn, INPUT);
+  pinMode(POut,OUTPUT);
+  pinMode(PIn, INPUT);
   // initialize the pushbutton pin as an input:
-  pinMode(buttonSwap, INPUT_PULLUP);
-  pinMode(buttonRead, INPUT_PULLUP);
-  pinMode(buttonError, INPUT_PULLUP);
-  pinMode(buttonTick, INPUT_PULLUP);
+  pinMode(swapPin, INPUT);
+  pinMode(readPin, INPUT);
+  pinMode(phasePin, INPUT);
+  pinMode(tickPin, INPUT);
   randomSeed(analogRead(0));
   internalState = 0;
   logicalState = random(0,2);
@@ -95,40 +95,40 @@ void setup() {
 
 int old_read_state=LOW;
 int old_swap_state=LOW;
-int old_error_state=LOW;
+int old_phase_state=LOW;
 int old_tick_state=LOW;
 void loop() {
 
-  int read_state = digitalRead(buttonRead);
-  int swap_state = digitalRead(buttonSwap);
-  int error_state = digitalRead(buttonError);
-  int tick_state = digitalRead(buttonTick);
+  int read_state = digitalRead(readPin);
+  int swap_state = digitalRead(swapPin);
+  int phase_state = digitalRead(phasePin);
+  int tick_state = digitalRead(tickPin);
 
   // Check if there is any change
-  if (read_state == old_read_state && swap_state == old_swap_state && error_state == old_error_state && tick_state ==old_tick_state) {
+  if (read_state == old_read_state && swap_state == old_swap_state && phase_state == old_phase_state && tick_state ==old_tick_state) {
     delay(50);
     return;
   }
 
   // Set activity LED correctly
-  if (read_state == HIGH && swap_state == HIGH && error_state == HIGH && tick_state==HIGH) digitalWrite(activityLED, LOW);
+  if (read_state == LOW && swap_state == LOW && phase_state == LOW && tick_state==LOW) digitalWrite(activityLED, LOW);
   else digitalWrite(activityLED, HIGH);
 
   if (read_state != old_read_state) {
-    if (read_state == LOW) read_down();
+    if (read_state == HIGH) read_down();
     else read_up();
   }
   if (swap_state != old_swap_state) {
-    if (swap_state == LOW) swap_down();
+    if (swap_state == HIGH) swap_down();
     else swap_up();
   }
-  if (error_state != old_error_state) {
-    if (error_state == LOW) error_down();
-    else error_up();
+  if (phase_state != old_phase_state) {
+    if (phase_state == HIGH) phase_down();
+    else phase_up();
   }
 
   if (tick_state != old_tick_state) {
-    if (tick_state == LOW) tick_down();
+    if (tick_state == HIGH) tick_down();
     else tick_up();
   }
 
@@ -147,7 +147,7 @@ void loop() {
 
   old_read_state = read_state;
   old_swap_state = swap_state;
-  old_error_state = error_state;
+  old_phase_state = phase_state;
   old_tick_state = tick_state;
 
 
