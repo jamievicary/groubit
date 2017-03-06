@@ -1,10 +1,11 @@
-const int zeroLED = 2;
-const int oneLED  = 14;
-const int activityLED = 13;
+const int zeroLED = (1<<2); // Pin A2
+const int oneLED  = (1<<3);// Pin A3
+const int activityLED = (1<<7); // Pin A7
+
 //const int TickOut = 9;  //Output Pin for tick
 //const int TickIn = 8;  //Input Pin for tick
-const int buttonSwap = 0;
-const int buttonRead = 1;
+const int buttonSwap = (1<<0); // Pin A0
+const int buttonRead = (1<<1);      // Pin A1
 //const int buttonTick = 5;  //Button Pin for tick
 //const int buttonError= 10;
 //const bool debug= false;
@@ -17,28 +18,32 @@ int counter=0;
 
 
 void WriteHigh(int Pin) {
-
-  
+  PORTA= PORTA | Pin;
 }
 
 void WriteLow(int Pin){
-  
+  PORTA= PORTA & ~Pin;
+}
+
+int Read(int Pin){
+  if(PINA & Pin) return HIGH;
+  return LOW;
 }
 void read_down() {
     // turn LED on:
     //internalState=1;
     internalState=random(0,2);
     if (logicalState==1){
-      digitalWrite(oneLED, HIGH);
+      WriteHigh(oneLED);
     } else {
-      digitalWrite(zeroLED, HIGH);
+      WriteHigh(zeroLED);
     }  
 }
 
 void read_up() {
-  digitalWrite(oneLED, LOW);
-  digitalWrite(zeroLED, LOW);
-  digitalWrite(activityLED, LOW);
+  WriteLow(oneLED);
+  WriteLow(zeroLED);
+  WriteLow(activityLED);
 }
 
 /*
@@ -93,22 +98,19 @@ void tick_down(){
 */
 
 void setup() {
-  // initialize the LED pin as an output:
-  pinMode(zeroLED, OUTPUT);
-  pinMode(oneLED, OUTPUT);
-  pinMode(activityLED, OUTPUT);
+  // initialize the LED pins A2,3,7 as output:
+  DDRA= DDRA | (oneLED | zeroLED |activityLED);
+  
   //pinMode(TickOut,OUTPUT);
   //pinMode(TickIn, INPUT);
-  // initialize the pushbutton pin as an input:
-  pinMode(buttonSwap, INPUT_PULLUP);
-  pinMode(buttonRead, INPUT_PULLUP);
-  //pinMode(buttonError, INPUT_PULLUP);
-  //pinMode(buttonTick, INPUT_PULLUP);
-  //randomSeed(analogRead(0));
-  //internalState = 0;
+
+  //Input: Initialize A0, A1 as input.
+  DDRA=DDRA & B11111100;
+  // Set internal pullup resistors:
+  PORTA = PORTA | B00000011;
+
   logicalState = 1;
   internalState = random(0,2);
-  //if (debug==true) Serial.begin(9600);
 }
 
 int old_read_state=LOW;
@@ -117,8 +119,8 @@ int old_swap_state=LOW;
 int old_tick_state=LOW;
 void loop() {
 
-  int read_state = digitalRead(buttonRead);
-  int swap_state = digitalRead(buttonSwap);
+  int read_state = Read(buttonRead);
+  int swap_state = Read(buttonSwap);
   //int error_state = digitalRead(buttonError);
   //int tick_state = digitalRead(buttonTick);
 
@@ -130,7 +132,7 @@ void loop() {
 
   // Set activity LED correctly
   if (read_state == HIGH && swap_state == HIGH /*  && error_state == HIGH */  /*&& tick_state==HIGH*/) digitalWrite(activityLED, LOW);
-  else digitalWrite(activityLED, HIGH);
+  else WriteHigh(activityLED);
 
   if (read_state != old_read_state) {
     if (read_state == LOW) read_down();
