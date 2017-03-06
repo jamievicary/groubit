@@ -1,14 +1,15 @@
-const int zeroLED = (1<<2); // Pin A2
-const int oneLED  = (1<<3);// Pin A3
-const int activityLED = (1<<7); // Pin A7
+const uint8_t zeroLED = (1<<2); // Pin A2
+const uint8_t oneLED  = (1<<3);// Pin A3
+const uint8_t activityLED = (1<<7); // Pin A7
 
 //const int TickOut = 9;  //Output Pin for tick
 //const int TickIn = 8;  //Input Pin for tick
-const int buttonSwap = (1<<0); // Pin A0
-const int buttonRead = (1<<1);      // Pin A1
+const uint8_t buttonSwap = (1<<0); // Pin A0
+const uint8_t buttonRead = (1<<1);      // Pin A1
+const uint8_t buttonError= (1<<4);
 //const int buttonTick = 5;  //Button Pin for tick
-//const int buttonError= 10;
-//const bool debug= false;
+
+
 
 // variables will change:
 int internalState = 0;         // variable for reading the pushbutton status
@@ -17,21 +18,20 @@ int logicalState = 0;
 int counter=0;
 
 
-void WriteHigh(int Pin) {
-  PORTA= PORTA | Pin;
+void WriteHigh(uint8_t Pin) {
+  PORTA |= Pin;
 }
 
-void WriteLow(int Pin){
-  PORTA= PORTA & ~Pin;
+void WriteLow(uint8_t Pin){
+  PORTA &= ~Pin;
 }
 
-int Read(int Pin){
+int Read(uint8_t Pin){
   if(PINA & Pin) return HIGH;
   return LOW;
 }
 void read_down() {
     // turn LED on:
-    //internalState=1;
     internalState=random(0,2);
     if (logicalState==1){
       WriteHigh(oneLED);
@@ -44,16 +44,17 @@ void read_up() {
   WriteLow(oneLED);
   WriteLow(zeroLED);
   WriteLow(activityLED);
+  //Replace this by WriteLow(oneLED | zeroLED | activityLED) if code works.
 }
 
-/*
+
 void error_down() {
   internalState = (internalState + 1) % 2;
 }
 void error_up() {
   // Do nothing
 }
-*/
+
 
 void swap_down() {
     int dummy = internalState;
@@ -99,15 +100,16 @@ void tick_down(){
 
 void setup() {
   // initialize the LED pins A2,3,7 as output:
-  DDRA= DDRA | (oneLED | zeroLED |activityLED);
+  DDRA |= (oneLED | zeroLED |activityLED);
   
   //pinMode(TickOut,OUTPUT);
   //pinMode(TickIn, INPUT);
 
-  //Input: Initialize A0, A1 as input.
-  DDRA=DDRA & B11111100;
+  //Input: Initialize A0, A1 as input. 
+  //Change this later to nicer code as above
+  DDRA &= B11111100;
   // Set internal pullup resistors:
-  PORTA = PORTA | B00000011;
+  PORTA |= B00000011;
 
   logicalState = 1;
   internalState = random(0,2);
