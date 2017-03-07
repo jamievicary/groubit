@@ -1,37 +1,33 @@
-//
-
 //Out on register A:
-const uint16_t zeroLED = (1<<2);     // Pin A2
-const uint16_t oneLED  = (1<<3);     // Pin A3
-const uint16_t activityLED = (1<<7); // Pin A7
+const uint8_t zeroLED[2] = {0,(1<<2)};     // Pin A2
+const uint8_t oneLED[2]  = {0,(1<<3)};     // Pin A3
+const uint8_t activityLED[2] = {0,(1<<7)}; // Pin A7
 // const uint8_t RTickOut[2] = {0,1};
 
 //In on register A:
-const uint16_t buttonSwap = (1<<0);  // Pin A0
-const uint16_t buttonRead = (1<<1);  // Pin A1
-const uint16_t buttonError= (1<<4);  // Pin A4
+const uint8_t buttonSwap[2] = {0,(1<<0)};  // Pin A0
+const uint8_t buttonRead[2] = {0,(1<<1)};  // Pin A1
+const uint8_t buttonError[2]= {0,(1<<4)};  // Pin A4
 // const uint8_t RTickIn[2] ={0,1} ;
 
 // Out on register B:
-const uint16_t LTickOut = (1<<3 | 1<<8);
+const uint8_t LTickOut[2] = {1,1<<3};
 
 
 // In on register B:
-const uint16_t buttonLTick = (1<<5 | 1<<8);  //Button Pin for tick
+const uint8_t buttonLTick[2] = {1,1<<5};  //Button Pin for tick
 // const uint8_t buttonRTick[2] = {1,1<<6};  //Button Pin for tick
-const uint16_t LTickIn = (1<<4 | 1<<8);  //Button Pin for tick
+const uint8_t LTickIn[2] = {1,1<<4};  //Button Pin for tick
 
 
 // Variables:
 int internalState = 0;         
 int logicalState = 0; 
 
-
-// Custom write function
-void Write(uint16_t Pin, int is_high) {
-  if (Pin & (1<<8)){
-    if(is_high)PORTB |= (Pin & ~(1<<8));
-    else PORTB &= ~(Pin & ~(1<<8));
+void Write2(uint8_t Pin, int is_high) {
+  if (Pin){
+    if(is_high)PORTB |= Pin;
+    else PORTB &= ~Pin;
   }
   else{
     if(is_high)PORTA |= Pin;
@@ -40,14 +36,27 @@ void Write(uint16_t Pin, int is_high) {
     
 }
 
+// Custom write function
+void Write(uint8_t Pin[2], int is_high) {
+  if (Pin[0]){
+    if(is_high)PORTB |= Pin[1];
+    else PORTB &= ~Pin[1];
+  }
+  else{
+    if(is_high)PORTA |= Pin[1];
+    else PORTA &= ~Pin[1];
+  }
+    
+}
+
 // Custom read function
-int Read(uint16_t Pin){
-  if(Pin & (1<<8)){
-    if(PINB & (Pin & ~(1<<8))) return HIGH;
+int Read(uint8_t Pin[2]){
+  if(Pin[0]){
+    if(PINB & Pin[1]) return HIGH;
     return LOW;
   }
   else{
-    if(PINA & Pin) return HIGH;
+    if(PINA & Pin[1]) return HIGH;
     return LOW;
   }
 
@@ -102,9 +111,9 @@ void tick_up(bool left){
 }
 
 void tick_down(bool left){
-  uint16_t button = buttonLTick;
-  uint16_t TOut = LTickOut;
-  uint16_t TIn =  LTickIn;
+  uint8_t button[2] = {buttonLTick[0],buttonLTick[1]};
+  uint8_t TOut[2] = {LTickOut[0] , LTickOut[1]};
+  uint8_t TIn[2] =  {LTickIn[0], LTickIn[1]};
   
   /*
   if(~left){
@@ -137,20 +146,20 @@ void tick_down(bool left){
 
 void setup() {
   // initialize output of register A:
-  DDRA |= (oneLED | zeroLED | activityLED /*| RTickOut*/);
+  DDRA |= (oneLED[1] | zeroLED[1] | activityLED[1] /*| RTickOut[1]*/);
 
   // initialize output of register B:
-  DDRB |= (LTickOut & ~(1<<8));
+  DDRB |= LTickOut[1];
 
   // initialize input of register A:
-  DDRA &= ~(buttonSwap | buttonRead | buttonError /*| RTickIn*/);
+  DDRA &= ~(buttonSwap[1] | buttonRead[1] | buttonError[1] /*| RTickIn[1]*/);
   // Set internal pullup resistors for buttons on register A:
-  PORTA |= (buttonSwap | buttonRead | buttonError);
+  PORTA |= (buttonSwap[1] | buttonRead[1] | buttonError[1]);
 
   // initialize input of register B:
-  DDRB &= ~ ((buttonLTick /*| buttonRTick[1] */ | LTickIn) & ~ (1<<8));
+  DDRB &= ~(buttonLTick[1] /*| buttonRTick[1] */ | LTickIn[1]);
   // internal pullup resistors for buttons on register B
-  PORTB |= (/*buttonRTick[1] |*/ buttonLTick) & ~ (1<<8);
+  PORTB |= (/*buttonRTick[1] |*/ buttonLTick[1]);
   
   logicalState = 1;
   internalState = random(0,2);
