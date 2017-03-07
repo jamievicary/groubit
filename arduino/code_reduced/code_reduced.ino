@@ -4,31 +4,31 @@
 const uint16_t zeroLED = (1<<2);     // Pin A2
 const uint16_t oneLED  = (1<<3);     // Pin A3
 const uint16_t activityLED = (1<<7); // Pin A7
-// const uint8_t RTickOut[2] = {0,1};
+const uint16_t RTickOut = 1<<6;
 
 //In on register A:
 const uint16_t buttonSwap = (1<<0);  // Pin A0
 const uint16_t buttonRead = (1<<1);  // Pin A1
 const uint16_t buttonError= (1<<4);  // Pin A4
-// const uint8_t RTickIn[2] ={0,1} ;
+const uint16_t RTickIn = 1<<5 ;
 
 // Out on register B:
-const uint16_t LTickOut = (1<<3 | 1<<8);
+const uint16_t LTickOut = (1<<4 | 1<<8);
 
 
 // In on register B:
 const uint16_t buttonLTick = (1<<5 | 1<<8);  //Button Pin for tick
-// const uint8_t buttonRTick[2] = {1,1<<6};  //Button Pin for tick
-const uint16_t LTickIn = (1<<4 | 1<<8);  //Button Pin for tick
+const uint16_t buttonRTick = (1<<6 | 1<<8);  //Button Pin for tick
+const uint16_t LTickIn = (1<<3 | 1<<8);  //
 
 
 // Variables:
-int internalState = 0;         
-int logicalState = 0; 
+uint8_t internalState = 0;         
+uint8_t logicalState = 0; 
 
 
 // Custom write function
-void Write(uint16_t Pin, int is_high) {
+void Write(uint16_t Pin, uint8_t is_high) {
   if (Pin & (1<<8)){
     if(is_high)PORTB |= (Pin & ~(1<<8));
     else PORTB &= ~(Pin & ~(1<<8));
@@ -67,7 +67,6 @@ void read_down() {
 
 // Read button not pressed
 void read_up() {
-  // All LEDs on same register
   Write(oneLED, LOW);
   Write(zeroLED, LOW);
   Write(activityLED, LOW);
@@ -96,23 +95,17 @@ void swap_up() {
 }
 
 // LTick button not pressed
-void tick_up(bool left){
+void tick_up(uint8_t left){
   if(left) Write(LTickOut,LOW);
-  //else Write(RTickOut,LOW);
+  else Write(RTickOut,LOW);
 }
 
-void tick_down(bool left){
-  uint16_t button = buttonLTick;
-  uint16_t TOut = LTickOut;
-  uint16_t TIn =  LTickIn;
+void tick_down(uint8_t left){
+  uint16_t button =  (left ? buttonLTick : buttonRTick);
+  uint16_t TOut = (left ? LTickOut : RTickOut);
+  uint16_t TIn =  (left ? LTickIn : RTickIn);
   
-  /*
-  if(~left){
-    uint8_t button[2] = {buttonRTick[0],buttonRTick[1]};
-    uint8_t TOut[2] = {RTickOut[0] , RTickOut[1]};
-    uint8_t TIn[2] =  {RTickIn[0], RTickIn[1]};
-  }
-  */
+  
 
   Write(TOut,HIGH);
   
@@ -137,47 +130,47 @@ void tick_down(bool left){
 
 void setup() {
   // initialize output of register A:
-  DDRA |= (oneLED | zeroLED | activityLED /*| RTickOut*/);
+  DDRA |= (oneLED | zeroLED | activityLED | RTickOut);
 
   // initialize output of register B:
   DDRB |= (LTickOut & ~(1<<8));
 
   // initialize input of register A:
-  DDRA &= ~(buttonSwap | buttonRead | buttonError /*| RTickIn*/);
+  DDRA &= ~(buttonSwap | buttonRead | buttonError | RTickIn);
   // Set internal pullup resistors for buttons on register A:
   PORTA |= (buttonSwap | buttonRead | buttonError);
 
   // initialize input of register B:
-  DDRB &= ~ ((buttonLTick /*| buttonRTick[1] */ | LTickIn) & ~ (1<<8));
+  DDRB &= ~ ((buttonLTick | buttonRTick  | LTickIn) & ~ (1<<8));
   // internal pullup resistors for buttons on register B
-  PORTB |= (/*buttonRTick[1] |*/ buttonLTick) & ~ (1<<8);
+  PORTB |= ((buttonRTick | buttonLTick) & ~ (1<<8));
   
   logicalState = 1;
   internalState = random(0,2);
 }
 
-int old_read_state=LOW;
-int old_swap_state=LOW;
-int old_error_state=LOW;
-int old_ltick_state=LOW;
-//int old_rtick_state=LOW;
+uint8_t old_read_state=LOW;
+uint8_t old_swap_state=LOW;
+uint8_t old_error_state=LOW;
+uint8_t old_ltick_state=LOW;
+uint8_t old_rtick_state=LOW;
 
 void loop() {
 
-  int read_state = Read(buttonRead);
-  int swap_state = Read(buttonSwap);
-  int error_state = Read(buttonError);
-  int ltick_state = Read(buttonLTick);
-//  int rtick_state = Read(buttonRTick);
+  uint8_t read_state = Read(buttonRead);
+  uint8_t swap_state = Read(buttonSwap);
+  uint8_t error_state = Read(buttonError);
+  uint8_t ltick_state = Read(buttonLTick);
+  uint8_t rtick_state = Read(buttonRTick);
 
   // Check if there is any change
-  if (read_state == old_read_state && swap_state == old_swap_state && error_state == old_error_state  && ltick_state ==old_ltick_state /*&& rtick_state ==old_rtick_state */) {
+  if (read_state == old_read_state && swap_state == old_swap_state && error_state == old_error_state  && ltick_state ==old_ltick_state && rtick_state ==old_rtick_state) {
     delay(50);
     return;
   }
 
   // Set activity LED correctly
-  if (read_state == HIGH && swap_state == HIGH && error_state == HIGH  && ltick_state==HIGH /* && rtick_state==HIGH */) Write(activityLED,LOW);
+  if (read_state == HIGH && swap_state == HIGH && error_state == HIGH  && ltick_state==HIGH  && rtick_state==HIGH ) Write(activityLED,LOW);
   else Write(activityLED,HIGH);
 
   if (read_state != old_read_state) {
@@ -199,12 +192,12 @@ void loop() {
     else tick_up(1);
   }
 
-  /*
+  
   if (rtick_state != old_rtick_state) {
     if (rtick_state == LOW) tick_down(0);
     else tick_up(0);
   }
-  */
+  
 
   // Delay a little bit to avoid bouncing
   delay(50);
@@ -213,7 +206,7 @@ void loop() {
   old_swap_state = swap_state;
   old_error_state = error_state;
   old_ltick_state = ltick_state;
-  //old_rtick_state = rtick_state;
+  old_rtick_state = rtick_state;
 
 
 }
