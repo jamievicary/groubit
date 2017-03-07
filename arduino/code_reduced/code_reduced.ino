@@ -7,7 +7,7 @@ const int activityLED = (1<<7); // Pin A7
 const int buttonSwap = (1<<0); // Pin A0
 const int buttonRead = (1<<1);      // Pin A1
 //const int buttonTick = 5;  //Button Pin for tick
-//const int buttonError= 10;
+const int buttonError= (1<<4);
 //const bool debug= false;
 
 // variables will change:
@@ -17,43 +17,39 @@ int logicalState = 0;
 int counter=0;
 
 
-void WriteHigh(int Pin) {
-  PORTA= PORTA | Pin;
-}
-
-void WriteLow(int Pin){
-  PORTA= PORTA & ~Pin;
+void Write(int Pin, int high) {
+  if(high)PORTA |= Pin;
+  else PORTA &= ~Pin;
 }
 
 int Read(int Pin){
   if(PINA & Pin) return HIGH;
   return LOW;
 }
+
 void read_down() {
-    // turn LED on:
-    //internalState=1;
+
     internalState=random(0,2);
+    // turn LED on:
     if (logicalState==1){
-      WriteHigh(oneLED);
+      Write(oneLED,HIGH);
     } else {
-      WriteHigh(zeroLED);
+      Write(zeroLED,HIGH);
     }  
 }
 
 void read_up() {
-  WriteLow(oneLED);
-  WriteLow(zeroLED);
-  WriteLow(activityLED);
+  Write(oneLED | zeroLED | activityLED, LOW);
 }
 
-/*
+
 void error_down() {
   internalState = (internalState + 1) % 2;
 }
 void error_up() {
   // Do nothing
 }
-*/
+
 
 void swap_down() {
     int dummy = internalState;
@@ -99,15 +95,15 @@ void tick_down(){
 
 void setup() {
   // initialize the LED pins A2,3,7 as output:
-  DDRA= DDRA | (oneLED | zeroLED |activityLED);
+  DDRA |= (oneLED | zeroLED |activityLED);
   
   //pinMode(TickOut,OUTPUT);
   //pinMode(TickIn, INPUT);
 
   //Input: Initialize A0, A1 as input.
-  DDRA=DDRA & B11111100;
+  DDRA &= ~(buttonSwap | buttonRead | buttonError);
   // Set internal pullup resistors:
-  PORTA = PORTA | B00000011;
+  PORTA |= (buttonSwap | buttonRead | buttonError);
 
   logicalState = 1;
   internalState = random(0,2);
@@ -115,24 +111,24 @@ void setup() {
 
 int old_read_state=LOW;
 int old_swap_state=LOW;
-//int old_error_state=LOW;
+int old_error_state=LOW;
 int old_tick_state=LOW;
 void loop() {
 
   int read_state = Read(buttonRead);
   int swap_state = Read(buttonSwap);
-  //int error_state = digitalRead(buttonError);
+  int error_state = Read(buttonError);
   //int tick_state = digitalRead(buttonTick);
 
   // Check if there is any change
-  if (read_state == old_read_state && swap_state == old_swap_state /* && error_state == old_error_state */ /*&& tick_state ==old_tick_state*/) {
+  if (read_state == old_read_state && swap_state == old_swap_state && error_state == old_error_state  /*&& tick_state ==old_tick_state*/) {
     delay(50);
     return;
   }
 
   // Set activity LED correctly
-  if (read_state == HIGH && swap_state == HIGH /*  && error_state == HIGH */  /*&& tick_state==HIGH*/) digitalWrite(activityLED, LOW);
-  else WriteHigh(activityLED);
+  if (read_state == HIGH && swap_state == HIGH && error_state == HIGH  /*&& tick_state==HIGH*/) Write(activityLED,LOW);
+  else Write(activityLED,HIGH);
 
   if (read_state != old_read_state) {
     if (read_state == LOW) read_down();
@@ -142,12 +138,12 @@ void loop() {
     if (swap_state == LOW) swap_down();
     else swap_up();
   }
-  /*
+  
   if (error_state != old_error_state) {
     if (error_state == LOW) error_down();
     else error_up();
   }
-  */
+  
 /*
   if (tick_state != old_tick_state) {
     if (tick_state == LOW) tick_down();
@@ -171,7 +167,7 @@ void loop() {
 
   old_read_state = read_state;
   old_swap_state = swap_state;
-  //old_error_state = error_state;
+  old_error_state = error_state;
   //old_tick_state = tick_state;
 
 
