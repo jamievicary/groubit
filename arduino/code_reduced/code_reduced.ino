@@ -1,4 +1,3 @@
-//
 
 //Out on register A:
 const uint16_t zeroLED = (1<<2);     // Pin A2
@@ -27,6 +26,8 @@ uint8_t internalState = 0;
 uint8_t logicalState = 0; 
 
 
+
+
 // Custom write function
 void Write(uint16_t Pin, uint8_t is_high) {
   if (Pin & (1<<8)){
@@ -41,7 +42,7 @@ void Write(uint16_t Pin, uint8_t is_high) {
 }
 
 // Custom read function
-int Read(uint16_t Pin){
+uint8_t Read(uint16_t Pin){
   if(Pin & (1<<8)){
     if(PINB & (Pin & ~(1<<8))) return HIGH;
     return LOW;
@@ -84,7 +85,7 @@ void error_up() {
 
 // Swap button pressed
 void swap_down() {
-    int dummy = internalState;
+    uint8_t dummy = internalState;
     internalState = logicalState;
     logicalState = dummy;
 }
@@ -109,7 +110,7 @@ void tick_down(uint8_t left){
 
   Write(TOut,HIGH);
   
-  int TickIn_state = LOW;
+  uint8_t TickIn_state = LOW;
   while (Read(button)==LOW){
     TickIn_state=Read(TIn);
     if (TickIn_state==LOW) delay(10);
