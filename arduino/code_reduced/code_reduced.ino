@@ -1,11 +1,13 @@
 
 //Out on register A:
-const uint16_t zeroLED = (1<<2);     // Pin A2
+const uint16_t zeroLED = (1<<2);// Pin A2
 const uint16_t oneLED  = (1<<3);     // Pin A3
 const uint16_t activityLED = (1<<7); // Pin A7
 const uint16_t RTickOut = 1<<6;
 
 //In on register A:
+
+//;  // Pin A0
 const uint16_t buttonSwap = (1<<0);  // Pin A0
 const uint16_t buttonRead = (1<<1);  // Pin A1
 const uint16_t buttonError= (1<<4);  // Pin A4
