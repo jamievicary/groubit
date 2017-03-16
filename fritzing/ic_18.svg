@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!-- Created with Fritzing (http://www.fritzing.org/) -->
+<svg xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' version='1.2' baseProfile='tiny' x='0in' y='0in' width='0.451in' height='0.422299in' viewBox='0 0 32.472 30.4055' >
+<g partID='58420'><g xmlns="http://www.w3.org/2000/svg" id="copper1" stroke-width="0">
+ <rect xmlns="http://www.w3.org/2000/svg" y="27.1511" stroke="none" id="connector0pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="0.792"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="27.1511" stroke="none" id="connector1pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="4.392"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="27.1511" stroke="none" id="connector2pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="7.992"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="27.1511" stroke="none" id="connector3pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="11.592"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="27.1511" stroke="none" id="connector4pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="15.192"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="27.1511" stroke="none" id="connector5pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="18.792"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="27.1511" stroke="none" id="connector6pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="22.392"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="27.1511" stroke="none" id="connector7pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="25.992"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="27.1511" stroke="none" id="connector8pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="29.592"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="0.00708661" stroke="none" id="connector9pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="29.592"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="0.00708661" stroke="none" id="connector10pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="25.992"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="0.00708661" stroke="none" id="connector11pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="22.392"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="0.00708661" stroke="none" id="connector12pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="18.792"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="0.00708661" stroke="none" id="connector13pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="15.192"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="0.00708661" stroke="none" id="connector14pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="11.592"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="0.00708661" stroke="none" id="connector15pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="7.992"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="0.00708661" stroke="none" id="connector16pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="4.392"/>
+ <rect xmlns="http://www.w3.org/2000/svg" y="0.00708661" stroke="none" id="connector17pad" fill="#F7BD13" height="3.24" stroke-width="0" width="2.16" x="0.792"/>
+</g>
+</g><g partID='58421'><g xmlns="http://www.w3.org/2000/svg" id="silkscreen" stroke-width="0">
+ <g xmlns="http://www.w3.org/2000/svg" stroke-width="0">
+  <title xmlns="http://www.w3.org/2000/svg">element:E$1</title>
+  <g xmlns="http://www.w3.org/2000/svg" stroke-width="0">
+   <title xmlns="http://www.w3.org/2000/svg">package:SOIC18-W</title>
+   <line xmlns="http://www.w3.org/2000/svg" x1="0.216" stroke-linecap="round" stroke="white" y2="25.6751" x2="32.256" stroke-width="0.432" y1="25.6751"/>
+   <line xmlns="http://www.w3.org/2000/svg" x1="32.256" stroke-linecap="round" stroke="white" y2="4.79508" x2="32.256" stroke-width="0.432" y1="25.6751"/>
+   <line xmlns="http://www.w3.org/2000/svg" x1="32.256" stroke-linecap="round" stroke="white" y2="4.79508" x2="0.216" stroke-width="0.432" y1="4.79508"/>
+   <line xmlns="http://www.w3.org/2000/svg" x1="0.216" stroke-linecap="round" stroke="white" y2="25.6751" x2="0.216" stroke-width="0.432" y1="4.79508"/>
+   <circle xmlns="http://www.w3.org/2000/svg" cx="3.024" r="1.512" stroke="white" fill="none" cy="23.0831" stroke-width="0.432"/>
+  </g>
+ </g>
+</g>
+</g></svg>
