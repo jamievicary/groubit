@@ -26,7 +26,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -41,12 +41,12 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1274"
-     inkscape:window-height="930"
+     inkscape:window-width="1970"
+     inkscape:window-height="1456"
      id="namedview46"
      showgrid="false"
      inkscape:zoom="12.418794"
-     inkscape:cx="19.262467"
+     inkscape:cx="7.3853073"
      inkscape:cy="19.191419"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -57,202 +57,201 @@
      fit-margin-right="0"
      fit-margin-bottom="0" />
   <g
-     id="copper1"
-     transform="translate(-0.504,0.04174708)">
-    <rect
-       style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="1.8"
-       width="0.93543309"
-       height="3.24"
-       id="connector17pad"
-       y="0.0070866193" />
+     partID="58421"
+     id="g25"
+     transform="matrix(1.1092008,0,0,0.99655857,0.00341232,0.11892023)">
     <g
-       transform="matrix(1.1092008,0,0,0.99655857,0.50741232,0.07717315)"
-       id="g25"
-       partID="58421">
+       id="silkscreen"
+       style="stroke-width:0">
       <g
-         style="stroke-width:0"
-         id="silkscreen">
+         id="g28"
+         style="stroke-width:0">
+        <title
+           id="title30">element:E$1</title>
         <g
-           style="stroke-width:0"
-           id="g28">
+           id="g32"
+           style="stroke-width:0">
           <title
-             id="title30">element:E$1</title>
-          <g
-             style="stroke-width:0"
-             id="g32">
-            <title
-               id="title34">package:SOIC18-W</title>
-            <line
-               style="stroke:#ffffff;stroke-width:0.43200001;stroke-linecap:round"
-               id="line36"
-               y1="25.6751"
-               x2="32.256001"
-               y2="25.6751"
-               x1="0.21600001" />
-            <line
-               style="stroke:#ffffff;stroke-width:0.43200001;stroke-linecap:round"
-               id="line38"
-               y1="25.6751"
-               x2="32.256001"
-               y2="4.7950802"
-               x1="32.256001" />
-            <line
-               style="stroke:#ffffff;stroke-width:0.43200001;stroke-linecap:round"
-               id="line40"
-               y1="4.7950802"
-               x2="0.21600001"
-               y2="4.7950802"
-               x1="32.256001" />
-            <line
-               style="stroke:#ffffff;stroke-width:0.43200001;stroke-linecap:round"
-               id="line42"
-               y1="4.7950802"
-               x2="0.21600001"
-               y2="25.6751"
-               x1="0.21600001" />
-            <circle
-               style="fill:none;stroke:#ffffff;stroke-width:0.43200001"
-               id="circle44"
-               cy="23.083099"
-               r="1.512"
-               cx="3.0239999" />
-          </g>
+             id="title34">package:SOIC18-W</title>
+          <line
+             x1="0.21600001"
+             y2="25.6751"
+             x2="32.256001"
+             y1="25.6751"
+             id="line36"
+             style="stroke:#ffffff;stroke-width:0.43200001;stroke-linecap:round" />
+          <line
+             x1="32.256001"
+             y2="4.7950802"
+             x2="32.256001"
+             y1="25.6751"
+             id="line38"
+             style="stroke:#ffffff;stroke-width:0.43200001;stroke-linecap:round" />
+          <line
+             x1="32.256001"
+             y2="4.7950802"
+             x2="0.21600001"
+             y1="4.7950802"
+             id="line40"
+             style="stroke:#ffffff;stroke-width:0.43200001;stroke-linecap:round" />
+          <line
+             x1="0.21600001"
+             y2="25.6751"
+             x2="0.21600001"
+             y1="4.7950802"
+             id="line42"
+             style="stroke:#ffffff;stroke-width:0.43200001;stroke-linecap:round" />
+          <circle
+             cx="3.0239999"
+             r="1.512"
+             cy="23.083099"
+             id="circle44"
+             style="fill:none;stroke:#ffffff;stroke-width:0.43200001" />
         </g>
       </g>
     </g>
+  </g>
+  <g
+     id="copper1">
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="5.4000001"
+       x="1.296"
+       width="0.93543309"
+       height="3.24"
+       id="connector17pad"
+       y="0.048833698" />
+    <rect
+       style="fill:#f7bd13;stroke:none;stroke-width:0"
+       x="4.8959999"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2"
-       y="-0.0095516164" />
+       y="0.032195464" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="9"
+       x="8.4960003"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-3"
-       y="-0.0095516127" />
+       y="0.032195468" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="12.6"
+       x="12.096001"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-3-1"
-       y="0.054866888" />
+       y="0.096613966" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="16.200001"
+       x="15.696001"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-3-0"
-       y="-0.0095515903" />
+       y="0.03219549" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="19.774559"
+       x="19.270559"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-0"
-       y="-0.025122538" />
+       y="0.016624542" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="23.374559"
+       x="22.87056"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-7"
-       y="-0.041760817" />
+       y="-1.373717e-005" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="26.97456"
+       x="26.47056"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-3-7"
-       y="-0.041760817" />
+       y="-1.373717e-005" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="30.57456"
+       x="30.07056"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-3-1-2"
-       y="0.022657737" />
+       y="0.064404815" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="34.174561"
+       x="33.670559"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-3-0-1"
-       y="-0.041760817" />
+       y="-1.373717e-005" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="1.7686911"
+       x="1.2646911"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-08"
-       y="27.111166" />
+       y="27.152912" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="5.3686914"
+       x="4.8646913"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-75"
-       y="27.09453" />
+       y="27.136276" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="8.9686909"
+       x="8.4646912"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-3-01"
-       y="27.09453" />
+       y="27.136276" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="12.568693"
+       x="12.064693"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-3-1-5"
-       y="27.158945" />
+       y="27.200691" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="16.168694"
+       x="15.664694"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-3-0-8"
-       y="27.09453" />
+       y="27.136276" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="19.743252"
+       x="19.239252"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-0-8"
-       y="27.078959" />
+       y="27.120705" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="23.34325"
+       x="22.839251"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-7-0"
-       y="27.062319" />
+       y="27.104065" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="26.943251"
+       x="26.439251"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-3-7-5"
-       y="27.062319" />
+       y="27.104065" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="30.543253"
+       x="30.039253"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-3-1-2-3"
-       y="27.126738" />
+       y="27.168484" />
     <rect
        style="fill:#f7bd13;stroke:none;stroke-width:0"
-       x="34.14325"
+       x="33.639248"
        width="0.93543309"
        height="3.2400002"
        id="connector17pad-2-3-0-1-4"
-       y="27.062319" />
+       y="27.104065" />
   </g>
 </svg>
