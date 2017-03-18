@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Fritzing (http://www.fritzing.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.2"
+   x="0in"
+   y="0in"
+   width="1.1508124in"
+   height="0.85960609in"
+   viewBox="0 0 29.23059 21.834047"
+   id="svg2"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="battery2.svg">
+  <metadata
+     id="metadata25">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs23" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1469"
+     inkscape:window-height="891"
+     id="namedview21"
+     showgrid="false"
+     inkscape:zoom="6.315995"
+     inkscape:cx="39.19657"
+     inkscape:cy="38.007702"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <g
+     id="silkscreen"
+     transform="matrix(1.2203997,0,0,1.00385,-0.01622189,0.00325232)">
+    <path
+       class="other"
+       d="m 20.8719,14.8719 a 10.7703,10.7703 0 1 1 0,-7.99997"
+       id="path13"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#f0f0f0;stroke-width:0.18358545" />
+    <line
+       class="other"
+       x1="20.871901"
+       y1="6.8719301"
+       x2="23.871901"
+       y2="6.8719301"
+       id="line15"
+       style="stroke:#f0f0f0;stroke-width:0.18358545;stroke-linecap:round" />
+    <line
+       class="other"
+       x1="23.871901"
+       y1="6.8719301"
+       x2="23.871901"
+       y2="14.8719"
+       id="line17"
+       style="stroke:#f0f0f0;stroke-width:0.18358545;stroke-linecap:round" />
+    <line
+       class="other"
+       x1="23.871901"
+       y1="14.8719"
+       x2="20.871901"
+       y2="14.8719"
+       id="line19"
+       style="stroke:#f0f0f0;stroke-width:0.18358545;stroke-linecap:round" />
+  </g>
+  <g
+     id="copper1"
+     transform="translate(-0.8890021,0.09512388)">
+    <circle
+       id="connector1pad"
+       connectorname="2"
+       cx="2.0319574"
+       cy="9.805871"
+       style="fill:none;stroke:#f7bd13;stroke-width:0.38100091;stroke-miterlimit:4;stroke-dasharray:none"
+       r="0.57150137" />
+    <circle
+       id="connector0pad"
+       connectorname="1"
+       cx="28.95602"
+       cy="10.821874"
+       style="fill:none;stroke:#f7bd13;stroke-width:0.38100091;stroke-miterlimit:4;stroke-dasharray:none"
+       r="0.57150137" />
+    <circle
+       r="0.57150137"
+       style="fill:none;stroke:#f7bd13;stroke-width:0.38100091;stroke-miterlimit:4;stroke-dasharray:none"
+       cy="11.837876"
+       cx="2.0319574"
+       connectorname="3"
+       id="connector3pad" />
+    <g
+       id="copper0">
+      <circle
+         id="circle8"
+         connectorname="2"
+         cx="2.0319574"
+         cy="9.805871"
+         style="fill:none;stroke:#f7bd13;stroke-width:0.38100091;stroke-miterlimit:4;stroke-dasharray:none"
+         r="0.57150137" />
+      <circle
+         id="circle10"
+         connectorname="1"
+         cx="28.95602"
+         cy="10.821874"
+         style="fill:none;stroke:#f7bd13;stroke-width:0.38100091;stroke-miterlimit:4;stroke-dasharray:none"
+         r="0.57150137" />
+      <circle
+         r="0.57150137"
+         style="fill:none;stroke:#f7bd13;stroke-width:0.38100091;stroke-miterlimit:4;stroke-dasharray:none"
+         cy="11.837876"
+         cx="2.0319574"
+         connectorname="3"
+         id="circle4212" />
+    </g>
+  </g>
+</svg>
