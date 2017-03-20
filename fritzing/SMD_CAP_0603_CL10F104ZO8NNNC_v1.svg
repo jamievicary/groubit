@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg2"
+   viewBox="0 0 225.03453 139.00626"
+   height="1.3900626mm"
+   width="2.2503452mm"
+   version="1.1">
+  <metadata
+     id="metadata13">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs11" />
+  <g
+     id="copper1">
+    <rect
+       style="fill:#f7bf13;fill-opacity:1;stroke:none"
+       id="connector0pad"
+       y="19.999998"
+       x="20.000002"
+       height="98.999992"
+       width="55.000004" />
+    <rect
+       style="fill:#f7bf13;fill-opacity:1;stroke:none"
+       id="connector1pad"
+       y="20.006264"
+       x="150.03453"
+       height="98.999992"
+       width="55.000004" />
+  </g>
+  <rect
+     y="0.0062570041"
+     x="0"
+     height="139.00002"
+     width="225.00002"
+     id="silkscreen"
+     style="fill:none;fill-opacity:1;stroke:none" />
+</svg>
