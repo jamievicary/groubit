@@ -17,7 +17,7 @@
    viewBox="0 0 29.23059 21.834047"
    id="svg2"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="battery2.svg">
+   sodipodi:docname="battery.svg">
   <metadata
      id="metadata25">
     <rdf:RDF>
@@ -26,7 +26,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -46,7 +46,7 @@
      id="namedview21"
      showgrid="false"
      inkscape:zoom="6.315995"
-     inkscape:cx="39.19657"
+     inkscape:cx="10.460005"
      inkscape:cy="38.007702"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -113,7 +113,7 @@
        cy="11.837876"
        cx="2.0319574"
        connectorname="3"
-       id="connector3pad" />
+       id="connector2pad" />
     <g
        id="copper0">
       <circle
