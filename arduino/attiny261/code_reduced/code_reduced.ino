@@ -1,3 +1,6 @@
+#include <avr/interrupt.h>
+#include <avr/sleep.h>
+#include <avr/power.h>
 
 //Out on register A:
 const uint16_t zeroLED = (1<<2);// Pin A2
@@ -30,6 +33,22 @@ uint8_t logicalState = 0;
 
 
 
+void sleep()
+ {  
+  cli();
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);  
+  ADCSRA = 0;            // turn off ADC
+  power_all_disable ();
+  sleep_enable();                //enable sleep mode, a safety pin
+  sei();
+  sleep_cpu();                  // go into sleep mode.
+  // interrupt 
+  sleep_disable();              //disable sleep mode
+  power_all_enable();
+  sei();
+ }  
+
+    
 // Custom write function
 void Write(uint16_t Pin, uint8_t is_high) {
   if (Pin & (1<<8)){
@@ -150,6 +169,14 @@ void setup() {
   
   logicalState = 1;
   internalState = random(0,2);
+
+  // TO DO: Set all *unused* pins as input + pull_up. This saves energy.
+  
+  // Pin change interrupt
+  cli();                      // turn interrupts off while changing them.
+  GIMSK |= (1<<4 | 1<<5);     // enable Pin interrupt on register A and B (see datasheet)
+  PCMSK0 |= (buttonRead | buttonSwap | buttonError);  // use specified buttons on register A for interrupt.
+  sei();                      // turn interrupts on.
 }
 
 uint8_t old_read_state=LOW;
@@ -211,5 +238,5 @@ void loop() {
   old_ltick_state = ltick_state;
   old_rtick_state = rtick_state;
 
-
+  sleep();
 }
