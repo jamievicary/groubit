@@ -10,9 +10,9 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
-   width="2.45mm"
-   height="0.80000019mm"
-   viewBox="0 0 245.00001 80.00002"
+   width="2.8493099mm"
+   height="1.2005446mm"
+   viewBox="0 0 284.931 120.05446"
    id="svg2"
    inkscape:version="0.91 r13725"
    sodipodi:docname="SMD_LED_0603_new_v2.svg">
@@ -39,8 +39,8 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1290"
-     inkscape:window-height="699"
+     inkscape:window-width="1508"
+     inkscape:window-height="851"
      id="namedview9"
      showgrid="false"
      fit-margin-top="0"
@@ -48,24 +48,40 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:zoom="58.241003"
-     inkscape:cx="-1.892171"
-     inkscape:cy="1.417171"
-     inkscape:window-x="72"
-     inkscape:window-y="4"
+     inkscape:cx="2.51541"
+     inkscape:cy="2.1269491"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="copper1" />
+  <g
+     id="silkscreen"
+     transform="matrix(0.85782545,0,0,0.78902751,0.92430067,0.85017139)">
+    <rect
+       width="320"
+       height="140"
+       x="5"
+       y="5"
+       id="rect7"
+       style="fill:none;stroke:#ffffff;stroke-width:12.15498543;stroke-opacity:1" />
+    <path
+       d="m 166.68791,19.999996 0,110.000004"
+       id="path3612"
+       style="fill:none;stroke:#ffffff;stroke-width:12.15498734;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+  </g>
   <g
      id="copper1"
-     transform="translate(-20,-49.999996)">
+     transform="translate(-0.03450865,-29.977071)">
     <rect
-       width="80.000008"
+       width="79.000008"
        height="80.000008"
        x="20"
        y="49.999996"
        id="connector0pad"
        style="fill:#f7bf13;fill-opacity:1;stroke:none" />
     <rect
-       width="80.000008"
+       width="79.000008"
        height="80.000008"
        x="185.00002"
        y="50.000004"
