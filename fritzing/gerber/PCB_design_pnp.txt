@@ -1,0 +1,44 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=PCB_design
+*Date=18:25:23
+*CreatedBy=Fritzing 0.9.3b.04.19.5c895d327c44a3114e5fcc9d8260daf0cbb52806
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;[SMD];16.4908;-14.6084;-90;Top;CZ1
+2;;[SMD];49.5108;-61.5985;-90;Top;Measure
+3;;0603 [SMD];33.0317;-61.4077;90;Top;LED1
+4;;[SMD];66.0208;-14.6084;-90;Top;Phase
+5;;[SMD];82.5308;-14.6084;-90;Top;CZ2
+6;220;0603 [SMD];71.9367;-33.0277;0;Top;R4
+7;;0603 [SMD];66.0517;-61.4122;90;Top;LED2
+8;;rj45-8;11.3996;-38.1005;90;Bottom;U2
+9;;;5.00006;-71.2193;0;Bottom;Hole2
+10;;;62.9318;-66.2183;0;Bottom;TXT2
+11;220;0603 [SMD];63.0467;-33.0277;0;Top;R3
+12;;;61.1086;-41.0706;0;Bottom;IMG1
+13;;;91.0918;-46.7548;0;Bottom;TXT1
+14;220;0603 [SMD];7.63165;-18.2528;90;Top;R6
+15;220;0603 [SMD];9.70666;-62.2377;0;Top;R1
+16;;[SMD];33.0008;-14.6084;-90;Top;Hadamard
+17;;0603 [SMD];16.5216;-61.4077;90;Top;LED0
+18;;SO(w);45.1377;-34.9554;0;Top;ATTiny4313
+19;;rj45-8;87.6837;-38.1005;-90;Bottom;U1
+20;;;5.03552;-5.01964;0;Bottom;Hole1
+21;220;0603 [SMD];7.63165;-24.6028;90;Top;R5
+22;;;94.0646;-5.0281;0;Bottom;Hole4
+23;;[SMD];49.5108;-14.6084;-90;Top;Z
+24;220;0603 [SMD];82.5616;-65.2427;90;Top;R2
+25;;;94.0736;-71.1959;0;Bottom;Hole3
+26;;battcom_20mm_pth;61.2255;-52.8501;90;Bottom;BAT
+27;;;7.93453;-46.7944;0;Bottom;TXT1
+28;220;0603 [SMD];54.6216;-47.4627;90;Top;C
+29;;0603 [SMD];82.5617;-61.4077;90;Top;LEDA
