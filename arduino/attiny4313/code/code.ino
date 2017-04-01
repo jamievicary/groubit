@@ -2,7 +2,7 @@
 //#include <avr/sleep.h>
 //#include <avr/power.h>
 
-//buttons
+// buttons
 const uint16_t button_CZl = 1<<0; //D0
 const uint16_t button_H   = 1<<2; //D2
 const uint16_t button_Z   = 1<<3; //D3
@@ -10,22 +10,24 @@ const uint16_t button_P   = 1<<4; //D4
 const uint16_t button_CZr = 1<<5; //D5
 const uint16_t button_M   = 1<<6; //D6
 
-// all buttons
+// all buttons - useful variable to have
 const uint16_t all_buttons = button_CZl | button_H | button_Z | button_P | button_CZr | button_M;
 
-//LEDs
+// LEDs
+// 1 at bit 8 to indicate register B.
 const uint16_t LED_zero = 1<<4 | 1<<8; //B4
 const uint16_t LED_one  = 1<<3 | 1<<8; //B3
 const uint16_t LED_two  = 1<<2 | 1<<8; //B2
 const uint16_t LED_act  = 1<<1 | 1<<8; //B1
-// 1 at bit 8 to indicate register B.
 
-//jacks
+
+// jacks
+// 1 at bit 9 to indicate register A.
 const uint16_t TX_l = 1<<1 | 1<<9; // A1
 const uint16_t RX_l = 1<<1;        // D1
 const uint16_t TX_r = 1<<0 | 1<<9; // A0
 const uint16_t RX_r = 1<<0 | 1<<8; // B0
-// 1 at bit 9 to indicate register A.
+
 
 
 // Variables:
@@ -76,7 +78,7 @@ void Write(uint16_t pin, uint8_t is_high) {
 /* Function: Read
  * ---------------------
  * 'pin':     pin number 
- *  reads HIGH or LOW 
+ *  reads pin state HIGH or LOW 
  */
 uint8_t Read(uint16_t pin){
   if(pin & (1<<8)){ //read register B
