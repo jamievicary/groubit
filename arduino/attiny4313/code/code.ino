@@ -191,6 +191,7 @@ void CZ_down(uint8_t left){
     RX_state=Read(RX);
     if (RX_state==LOW) delay(10);
     else {
+      Write(LED_act,HIGH);
       delay(100);
       Write(TX,logicalState==0 ? LOW : HIGH);
       delay(50);
@@ -210,6 +211,7 @@ void CZ_down(uint8_t left){
  *  CZ not pressed
  */
 void CZ_up(uint8_t left){
+  Write(LED_act,LOW);
   if(left) Write(TX_l,LOW);
   else Write(TX_r,LOW);
 }
