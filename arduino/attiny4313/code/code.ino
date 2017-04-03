@@ -1,6 +1,6 @@
-//#include <avr/interrupt.h>
-//#include <avr/sleep.h>
-//#include <avr/power.h>
+#include <avr/interrupt.h>
+#include <avr/sleep.h>
+#include <avr/power.h>
 
 // buttons
 const uint16_t button_CZl = 1<<0; //D0
@@ -35,7 +35,7 @@ uint8_t internalState = 0;
 uint8_t logicalState = 0; 
 
 
-/*
+
 void sleep()
  {  
   cli();
@@ -49,7 +49,7 @@ void sleep()
   power_all_enable();
   sei();
  }  
-*/
+
 
     
 /* Function: Write
@@ -242,8 +242,8 @@ void setup() {
 
   // TO DO: Set all *unused* pins as input + pull_up. This saves energy.
 
-  /*
-  // Pin change interrupt
+  
+  /*// Pin change interrupt
   cli();                      // turn interrupts off while changing them.
   GIMSK |= (1<<4);            // enable Pin interrupt on register D (see datasheet)
   PCMSK0 |= all_buttons;      // use any button for interrupt.
