@@ -21,9 +21,9 @@ const uint16_t LTickOut = (1<<4 | 1<<8);
 
 
 // In on register B:
-const uint16_t buttonLTick = (1<<5 | 1<<8);  //Button Pin for tick
+const uint16_t buttonLTick = (1<<3 | 1<<8);  //Button Pin for tick
 const uint16_t buttonRTick = (1<<6 | 1<<8);  //Button Pin for tick
-const uint16_t LTickIn = (1<<3 | 1<<8);  //
+const uint16_t LTickIn = (1<<5 | 1<<8);  //
 
 
 // Variables:
@@ -136,6 +136,7 @@ void tick_down(uint8_t left){
     TickIn_state=Read(TIn);
     if (TickIn_state==LOW) delay(10);
     else {
+      Write(activityLED,HIGH);
       delay(100);
       Write(TOut,logicalState==0 ? LOW : HIGH);
       delay(50);
@@ -200,8 +201,8 @@ void loop() {
   }
 
   // Set activity LED correctly
-  if (read_state == HIGH && swap_state == HIGH && error_state == HIGH  && ltick_state==HIGH  && rtick_state==HIGH ) Write(activityLED,LOW);
-  else Write(activityLED,HIGH);
+  if (read_state == HIGH && swap_state == HIGH && error_state == HIGH  ) Write(activityLED,LOW);
+  else   Write(activityLED,HIGH);
 
   if (read_state != old_read_state) {
     if (read_state == LOW) read_down();
@@ -218,6 +219,7 @@ void loop() {
   }
 
   if (ltick_state != old_ltick_state) {
+    Write(activityLED,LOW);
     if (ltick_state == LOW) tick_down(1);
     else tick_up(1);
   }
