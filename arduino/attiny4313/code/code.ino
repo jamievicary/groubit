@@ -45,6 +45,7 @@ void sleep()
   sei();
   sleep_cpu();                  // go into sleep mode.
   // interrupt 
+  cli();
   sleep_disable();              //disable sleep mode
   power_all_enable();
   sei();
@@ -191,7 +192,7 @@ void CZ_down(uint8_t left){
     RX_state=Read(RX);
     if (RX_state==LOW) delay(10);
     else {
-      Write(LED_act,HIGH);
+      Write(LED_act,LOW);
       delay(100);
       Write(TX,logicalState==0 ? LOW : HIGH);
       delay(50);
@@ -221,18 +222,18 @@ void CZ_up(uint8_t left){
 
 void setup() {
   // initialize output on register A:
-  DDRA |= (TX_l | TX_r) & ~(1<<9);
+  //DDRA |= (TX_l | TX_r) & ~(1<<9);
+  DDRA |=00000111;  // All possible registers on A to output, to save battery.
   // initialize input on register A:
   // --
   // initialize output on register B:
-  DDRB |= (LED_zero | LED_one | LED_two | LED_act) & ~(1<<8);
+  // DDRB |= (LED_zero | LED_one | LED_two | LED_act) & ~(1<<8);
   // initialize input on register B:
-  DDRB &= ~(RX_r & ~(1<<8));
-  // initialize output on register D:
-  DDRD |= all_buttons;
+  //DDRB &= ~(RX_r & ~(1<<8));
+  DDRB = 11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
   // initialize input on register D:
-  DDRD &= ~RX_l;
-
+  DDRD &= ~(all_buttons & RX_l);
+  
   // internal pullup resistors for buttons on register D:
   PORTD |= all_buttons;
 
@@ -240,15 +241,14 @@ void setup() {
   logicalState = 1;
   internalState = random(0,2);
 
-  // TO DO: Set all *unused* pins as input + pull_up. This saves energy.
 
   
-  /*// Pin change interrupt
+  // Pin change interrupt
   cli();                      // turn interrupts off while changing them.
-  GIMSK |= (1<<4);            // enable Pin interrupt on register D (see datasheet)
-  PCMSK0 |= all_buttons;      // use any button for interrupt.
+  GIMSK |= (1<<PCIE2);            // enable Pin interrupt on register D (see datasheet)
+  PCMSK2 |= all_buttons;      // use any button for interrupt.
   sei();                      // turn interrupts on.
-  */
+  
 }
 
 
@@ -306,5 +306,5 @@ void loop() {
 
   old_button_state = button_state;
 
-  //sleep();
+  sleep();
 }
