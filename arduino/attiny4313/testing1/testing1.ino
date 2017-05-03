@@ -153,41 +153,62 @@ void loop() {
   }
 
 
-  if (counter==0 && ((button_state & button_CZl) != (old_button_state & button_CZl))){ // counter 0 and change on CZl
-    counter++; 
-    delay(50); 
-    return;
-  } 
+  if ((button_state & button_CZl) != (old_button_state & button_CZl) ){ // counter 0 and change on CZl
+    if ((button_state & button_CZl)!=button_CZl){
+      if (counter != 0) counter=0;
+      else{
+        counter++; 
+        Write(LED_zero,HIGH);
+        delay(50);
+        Write(LED_zero,LOW);
+      }
+    }
+  }
   
-  if (counter==1 && ((button_state & button_H) != (old_button_state & button_H))){ // counter 1 and change on H
-    counter++; 
-    delay(50); 
-    return;
-  } 
+  else if ((button_state & button_H) != (old_button_state & button_H) ){ // counter 0 and change on CZl
+    if ((button_state & button_H)!=button_H){
+      if (counter != 1) counter=0;
+      else{
+        counter++; 
+        Write(LED_one,HIGH);
+        delay(50);
+        Write(LED_one,LOW);
+      }
+    }
+  }
+   
   if (counter==2 && ((button_state & button_Z) != (old_button_state & button_Z))){ // counter 2 and change on Z
+    if ((button_state & button_Z)!=button_Z){//button pressed
+      counter++; 
+      delay(50);
+      old_button_state=button_state; 
+      return;
+    }
+    else{
+      delay(50);
+      old_button_state=button_state; 
+      return;
+    }
+  } 
+  if (counter==3 && ((button_state & button_P) != (old_button_state & button_P))&& ((button_state & button_P)!=button_P)){ // counter 3 and change on P
     counter++; 
     delay(50); 
     return;
   } 
-  if (counter==3 && ((button_state & button_P) != (old_button_state & button_P))){ // counter 3 and change on P
-    counter++; 
-    delay(50); 
-    return;
-  } 
-  if (counter==4 && ((button_state & button_CZr) != (old_button_state & button_CZr))){ // counter 4 and change on CZr
+  if (counter==4 && ((button_state & button_CZr) != (old_button_state & button_CZr))&& ((button_state & button_CZr)!=button_CZr)){ // counter 4 and change on CZr
     counter++; 
     delay(50); 
     return;
   } 
 
-  if (counter==5 && ((button_state & button_M) != (old_button_state & button_M))){ // counter 5 and change on M
+  if (counter==5 && ((button_state & button_M) != (old_button_state & button_M))&& ((button_state & button_M)!=button_M)){ // counter 5 and change on M
     lightup();
     counter=0;
     delay(50); 
     return;
   } 
 
-  counter=0;
+  
   delay(50);
 
   old_button_state = button_state;
