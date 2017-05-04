@@ -120,21 +120,20 @@ void setup() {
 
 void lightup(){
   Write(LED_zero, HIGH);
-  delay(30);
+  delay(50);
   Write(LED_zero,LOW);
-  delay(10);
+  delay(180);
   Write(LED_one, HIGH);
-  delay(30);
+  delay(50);
   Write(LED_one,LOW);
-  delay(10);  
+  delay(180);  
   Write(LED_two, HIGH);
-  delay(30);
+  delay(50);
   Write(LED_two,LOW);
-  delay(10);
+  delay(180);
   Write(LED_act, HIGH);
-  delay(30);
+  delay(50);
   Write(LED_act,LOW);
-  delay(10);
 }
 
 uint8_t old_button_state = all_buttons; // 0 on bit x iff button x pressed
@@ -156,48 +155,28 @@ void loop() {
   if ((button_state & button_CZl) != (old_button_state & button_CZl) ){ //change on CZl
     if ((button_state & button_CZl)!=button_CZl){ // button pressed
       if (counter != 0) counter=0;  //counter not zero
-      else{
-        counter++; 
-        Write(LED_zero,HIGH);
-        delay(50);
-        Write(LED_zero,LOW);
-      }
+      else counter++; 
     }
   }
   
   else if ((button_state & button_H) != (old_button_state & button_H) ){ //  change on H
     if ((button_state & button_H)!=button_H){
       if (counter != 1) counter=0;
-      else{
-        counter++; 
-        Write(LED_one,HIGH);
-        delay(50);
-        Write(LED_one,LOW);
-      }
+      else counter++; 
     }
   }
    
   else if ((button_state & button_Z) != (old_button_state & button_Z) ){ // change on Z
     if ((button_state & button_Z)!=button_Z){
       if (counter != 2) counter=0;
-      else{
-        counter++; 
-        Write(LED_two,HIGH);
-        delay(50);
-        Write(LED_two,LOW);
-      }
+      else counter++; 
     }
   }
   
   else if ((button_state & button_P) != (old_button_state & button_P) ){ // change on P
     if ((button_state & button_P)!=button_P){
       if (counter != 3) counter=0;
-      else{
-        counter++; 
-        Write(LED_act,HIGH);
-        delay(50);
-        Write(LED_act,LOW);
-      }
+      else counter++; 
     }
   } 
 
