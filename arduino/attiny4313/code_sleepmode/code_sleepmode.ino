@@ -33,15 +33,12 @@ const uint16_t RX_r = 1 << 0 | 1 << 8; // B0
 // Variables:
 uint8_t internalState = 0;
 uint8_t logicalState = 0;
+uint8_t randloop=0;
 
 
 
 void sleep()
 {
-  Write(LED_two, HIGH);
-  delay(40);
-  Write(LED_two, LOW);
-  cli();
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);
   power_all_disable ();
   sleep_enable();                //enable sleep mode, a safety pin
@@ -51,10 +48,6 @@ void sleep()
   cli();
   sleep_disable();              //disable sleep mode
   power_all_enable();
-  sei();
-  Write(LED_one, HIGH);
-  delay(40);
-  Write(LED_one, LOW);
 }
 
 
@@ -105,7 +98,7 @@ uint8_t Read(uint16_t pin) {
 */
 void M_down() {
   // randomize internal state
-  internalState = random(0, 2);
+  internalState = randloop;
   // turn LED on:
   if (logicalState == 1) {
     Write(LED_one, HIGH);
@@ -250,16 +243,16 @@ void setup() {
 
   // initialize logical and internal state
   logicalState = 1;
-  internalState = random(0, 2);
+  internalState = 0;
 
 
-  /*
+  
   // Pin change interrupt
   cli();                      // turn interrupts off while changing them.
   GIMSK |= (1<<PCIE2);            // enable Pin interrupt on register D (see datasheet)
   PCMSK2 |= all_buttons;      // use any button for interrupt.
-  sei();                      // turn interrupts on.
-  */
+  //sei();                      // turn interrupts on.
+  
 }
 
 
@@ -268,7 +261,7 @@ uint8_t old_button_state = all_buttons; // 0 on bit x iff button x pressed
 uint8_t button_state = all_buttons;
 
 void loop() {
-
+  randloop ^= 1;
   button_state = PIND & all_buttons; //read state of buttons from register D.
 
 
@@ -317,5 +310,6 @@ void loop() {
 
   old_button_state = button_state;
 
-  //sleep();
+  
+  sleep();
 }
