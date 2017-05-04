@@ -21,10 +21,10 @@
   <sodipodi:namedview
      inkscape:current-layer="svg2"
      inkscape:window-maximized="0"
-     inkscape:window-y="500"
-     inkscape:window-x="770"
+     inkscape:window-y="1154"
+     inkscape:window-x="14"
      inkscape:cy="121.9413"
-     inkscape:cx="184.76746"
+     inkscape:cx="113.28577"
      inkscape:zoom="2.3852263"
      showgrid="false"
      id="namedview1811"
@@ -61,32 +61,32 @@
   <g
      id="g6"
      transform="translate(0,-625.89001)"
-     style="stroke:#000000;stroke-opacity:1;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
+     style="stroke:#000000;stroke-opacity:1;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none">
     <g
        id="board"
-       style="stroke:#000000;stroke-opacity:1;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
+       style="stroke:#000000;stroke-opacity:1;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none">
       <g
          id="g9"
-         style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none" />
+         style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none" />
     </g>
   </g>
   <g
      partID="854240130"
      id="g120"
-     style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
+     style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none">
     <g
        transform="translate(8.13851,195.636)"
        id="g122"
-       style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
+       style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none">
       <g
          id="g124"
-         style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
+         style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none">
         <circle
            cx="6.13542"
            cy="6.13542"
            id="nonconn0"
            r="4.53542"
-           style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none"
+           style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none"
            stroke-width="0"
            stroke="#f9a435"
            fill="black" />
@@ -96,20 +96,20 @@
   <g
      partID="854240160"
      id="g127"
-     style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
+     style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none">
     <g
        transform="translate(8.03795,7.98297)"
        id="g129"
-       style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
+       style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none">
       <g
          id="g131"
-         style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
+         style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none">
         <circle
            cx="6.13543"
            cy="6.13543"
            id="circle133"
            r="4.53543"
-           style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none"
+           style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none"
            stroke-width="0"
            stroke="#f9a435"
            fill="black" />
@@ -119,20 +119,20 @@
   <g
      partID="854240190"
      id="g135"
-     style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
+     style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none">
     <g
        transform="translate(260.53,8.04937)"
        id="g137"
-       style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
+       style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none">
       <g
          id="g139"
-         style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
+         style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none">
         <circle
            cx="6.13543"
            cy="6.13543"
            id="circle141"
            r="4.53543"
-           style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none"
+           style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none"
            stroke-width="0"
            stroke="#f9a435"
            fill="black" />
@@ -142,20 +142,20 @@
   <g
      partID="854240220"
      id="g143"
-     style="stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none;stroke:#000000;stroke-opacity:1">
+     style="stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none;stroke:#000000;stroke-opacity:1">
     <g
        transform="translate(260.504,195.612)"
        id="g145"
-       style="stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none;stroke:#000000;stroke-opacity:1">
+       style="stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none;stroke:#000000;stroke-opacity:1">
       <g
          id="g147"
-         style="stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none;stroke:#000000;stroke-opacity:1">
+         style="stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none;stroke:#000000;stroke-opacity:1">
         <circle
            cx="6.13543"
            cy="6.13543"
            id="circle149"
            r="4.53543"
-           style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none"
+           style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none"
            stroke-width="0"
            stroke="#f9a435"
            fill="black" />
@@ -165,14 +165,14 @@
   <g
      partID="854256680"
      id="g1282"
-     style="stroke:#000000;stroke-opacity:1;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none" />
+     style="stroke:#000000;stroke-opacity:1;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none" />
   <path
-     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.46440095;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.35433071;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="M 17.716797 0 C 7.9018546 0 0 7.9018585 0 17.716797 L 0 81.160156 L 0 106.95117 L 69.53125 106.95117 L 69.53125 163.64258 L 0 163.64258 L 0 252.2832 C 0 262.09815 7.9018546 270 17.716797 270 L 333.2832 270 C 343.09814 270 351 262.09815 351 252.2832 L 351 163.3457 L 351 163.2832 L 280.19727 163.2832 L 280.19727 106.7168 L 351 106.7168 L 351 106.6543 L 351 17.716797 C 351 7.9018585 343.09814 0 333.2832 0 L 17.716797 0 z "
      transform="scale(0.8,0.8)"
      id="path3509" />
   <path
-     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.37152076;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.28346457;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="m 32.315625,9.5843752 216.265625,0 22.67657,22.6765628 0,43.573437 -56.49844,0 0,64.331245 56.49844,0 0,43.46251 -22.67657,22.67656 -216.265625,0 -22.678125,-22.67656 0,-43.46251 56.403125,0 0,-64.331245 -47.067187,0 -9.335938,0 0,-10.66875 0,-32.904687 z"
      id="path3507" />
 </svg>
