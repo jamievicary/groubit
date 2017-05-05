@@ -1,7 +1,6 @@
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
 #include <avr/power.h>
-//#include <avr/wdt.h>
 
 // buttons
 const uint16_t button_CZl = 1 << 0; //D0
@@ -36,14 +35,7 @@ uint8_t internalState = 0;
 uint8_t logicalState = 0;
 uint8_t randloop=0;
 
-//Watchdog:
-// in setup: MCUSR &= ~(1 << WDRF);       
-// first do WDTCSR |= (1 << WDCE) | (1 << WDE);
-// means: enable changes and reset timer
-// then WDTCSR = (1<< WDP1);
-// WDTCSR should have WDP0 =0 , WDP1= 1, WDP2 = 0, WDP3 = 0,
-//  WDTCSR |= (1 << WDIE); ENABLE watchdog, will be cleared after one run.
-//
+
 
 void sleep()
 {
@@ -243,7 +235,7 @@ void setup() {
   DDRB &= ~(RX_r & ~(1 << 8));
   //DDRB = 11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
   // initialize input on register D:
-  DDRD &= ~(all_buttons | RX_l);vt
+  DDRD &= ~(all_buttons | RX_l);
 
   // internal pullup resistors for buttons and RX on register D:
   PORTD |= (all_buttons | RX_l);
