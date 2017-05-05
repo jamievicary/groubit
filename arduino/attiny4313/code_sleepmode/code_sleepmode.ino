@@ -40,9 +40,13 @@ void sleep()
 {
   ACSR = 1<<ACD;
   PRR= 0xff;  // data sheet claims that the above two lines are not needed.
-  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+  MCUCR |= 1<<6 | 1<<4;
+  //set_sleep_mode(SLEEP_MODE_PWR_DOWN);
   power_all_disable ();
-  sleep_enable();                //enable sleep mode, a safety pin
+  MCUCR|= 1<<5;
+  //sleep_enable();                //enable sleep mode, a safety pin
+  BODCR= 1<<1|1<<0;
+  BODCR=1<<1;
   sei();
   // for watchdog: else WDTCSR|=(1<<WDIE);
   sleep_cpu();                  // go into sleep mode.
@@ -233,8 +237,8 @@ void setup() {
   // initialize output on register B:
   DDRB |= (LED_zero | LED_one | LED_two | LED_act) & ~(1 << 8);
   // initialize input on register B:
-  //DDRB &= ~(RX_r & ~(1 << 8));
-  DDRB = 11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
+  DDRB &= ~(RX_r & ~(1 << 8));
+  //DDRB = 11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
   // initialize input on register D:
   DDRD &= ~(all_buttons | RX_l);
 
