@@ -36,9 +36,10 @@ uint8_t logicalState = 0;
 uint8_t randloop=0;
 
 
-
 void sleep()
 {
+  ACSR = 1<<ACD;
+  PRR= 0xff;  // data sheet claims that the above two lines are not needed.
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);
   power_all_disable ();
   sleep_enable();                //enable sleep mode, a safety pin
@@ -232,8 +233,8 @@ void setup() {
   // initialize output on register B:
   DDRB |= (LED_zero | LED_one | LED_two | LED_act) & ~(1 << 8);
   // initialize input on register B:
-  DDRB &= ~(RX_r & ~(1 << 8));
-  //DDRB = 11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
+  //DDRB &= ~(RX_r & ~(1 << 8));
+  DDRB = 11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
   // initialize input on register D:
   DDRD &= ~(all_buttons | RX_l);
 
@@ -274,6 +275,7 @@ uint8_t old_button_state = all_buttons; // 0 on bit x iff button x pressed
 uint8_t button_state = all_buttons;
 
 void loop() {
+  sleep();
   randloop ^= 1;
   button_state = PIND & all_buttons; //read state of buttons from register D.
 
@@ -323,6 +325,4 @@ void loop() {
 
   old_button_state = button_state;
 
-  
-  sleep();
 }
