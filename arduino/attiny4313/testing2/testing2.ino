@@ -30,9 +30,7 @@ const uint16_t RX_r = 1 << 0 | 1 << 8; // B0
 
 
 
-// Variables:
-uint8_t internalState = 0;
-uint8_t logicalState = 0;
+
 
 
 
@@ -90,10 +88,10 @@ void setup() {
   // initialize output on register B:
   DDRB |= (LED_zero | LED_one | LED_two | LED_act) & ~(1 << 8);
   // initialize input on register B:
-  DDRB &= ~(RX_r & ~(1 << 8));
+  DDRB &= ~(RX_r & ~(1 << 8)) ;
   //DDRB = 11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
   // initialize input on register D:
-  DDRD &= ~(all_buttons & RX_l);
+  DDRD &= ~(all_buttons | RX_l);
 
   // internal pullup resistors for buttons and RX on register D:
   PORTD |= (all_buttons | RX_l);
@@ -103,9 +101,7 @@ void setup() {
   // set TX HIGH
   PORTA |= ((TX_l | TX_r) & ~(1 << 9));
 
-  // initialize logical and internal state
-  logicalState = 1;
-  internalState = random(0, 2);
+
 
 
   /*

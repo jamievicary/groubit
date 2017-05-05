@@ -93,7 +93,7 @@ void setup() {
   DDRB &= ~(RX_r & ~(1 << 8));
   //DDRB = 11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
   // initialize input on register D:
-  DDRD &= ~(all_buttons & RX_l);
+  DDRD &= ~(all_buttons | RX_l);
 
   // internal pullup resistors for buttons and RX on register D:
   PORTD |= (all_buttons | RX_l);

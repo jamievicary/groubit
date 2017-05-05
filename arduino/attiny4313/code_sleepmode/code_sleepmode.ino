@@ -1,7 +1,7 @@
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
 #include <avr/power.h>
-#include <avr/wdt.h>
+//#include <avr/wdt.h>
 
 // buttons
 const uint16_t button_CZl = 1 << 0; //D0
@@ -54,6 +54,7 @@ void sleep()
   // for watchdog: else WDTCSR|=(1<<WDIE);
   sleep_cpu();                  // go into sleep mode.
   // interrupt
+  cli();
   sleep_disable();              //disable sleep mode
   power_all_enable();
 }
@@ -242,7 +243,7 @@ void setup() {
   DDRB &= ~(RX_r & ~(1 << 8));
   //DDRB = 11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
   // initialize input on register D:
-  DDRD &= ~(all_buttons & RX_l);
+  DDRD &= ~(all_buttons | RX_l);vt
 
   // internal pullup resistors for buttons and RX on register D:
   PORTD |= (all_buttons | RX_l);
