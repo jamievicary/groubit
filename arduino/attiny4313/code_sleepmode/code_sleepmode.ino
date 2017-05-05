@@ -1,6 +1,7 @@
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
 #include <avr/power.h>
+#include <avr/wdt.h>
 
 // buttons
 const uint16_t button_CZl = 1 << 0; //D0
@@ -35,7 +36,14 @@ uint8_t internalState = 0;
 uint8_t logicalState = 0;
 uint8_t randloop=0;
 
-
+//Watchdog:
+// in setup: MCUSR &= ~(1 << WDRF);       
+// first do WDTCSR |= (1 << WDCE) | (1 << WDE);
+// means: enable changes and reset timer
+// then WDTCSR = (1<< WDP1);
+// WDTCSR should have WDP0 =0 , WDP1= 1, WDP2 = 0, WDP3 = 0,
+//  WDTCSR |= (1 << WDIE); ENABLE watchdog, will be cleared after one run.
+//
 
 void sleep()
 {
@@ -43,9 +51,9 @@ void sleep()
   power_all_disable ();
   sleep_enable();                //enable sleep mode, a safety pin
   sei();
+  // for watchdog: else WDTCSR|=(1<<WDIE);
   sleep_cpu();                  // go into sleep mode.
   // interrupt
-  cli();
   sleep_disable();              //disable sleep mode
   power_all_enable();
 }
@@ -217,7 +225,10 @@ void CZ_up(uint8_t left) {
 }
 
 
-
+ISR(PCINT2_Vect){
+}
+ISR( WDT_vect ) {
+}
 
 void setup() {
   // initialize output on register A:
@@ -252,7 +263,16 @@ void setup() {
   GIMSK |= (1<<PCIE2);            // enable Pin interrupt on register D (see datasheet)
   PCMSK2 |= all_buttons;      // use any button for interrupt.
   //sei();                      // turn interrupts on.
-  
+
+
+  //Watchdog
+  /*
+  r mode
+  MCUSR &= ~(1 << WDRF);
+  WDTCSR |= (1 << WDCE) | (1 << WDE);
+  // means: enable changes and reset timer
+  WDTCSR = (1<< WDP1); //timer set to 64 ms.
+  */
 }
 
 
