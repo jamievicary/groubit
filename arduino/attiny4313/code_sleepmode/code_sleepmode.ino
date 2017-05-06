@@ -44,13 +44,13 @@ void sleepnow()
   //DDRD |= RX_l;
   //DDRB |= (RX_r & ~ (1<<8));
   cli();
-  GIFR |= 1<<PCIF2;
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);
   power_all_disable ();
   //MCUCR|= 1<<5;
   sleep_enable();                //enable sleep mode, a safety pin
   BODCR= 1<<1|1<<0;
   BODCR=1<<1;
+  GIFR |= 1<<PCIF2;
   sei();
   // for watchdog: else WDTCSR|=(1<<WDIE);
   sleep_cpu();                  // go into sleep mode.
@@ -295,10 +295,10 @@ void loop() {
   delay(1000);
   */
   sleepnow();
-  randloop ^= 1;
+  delay(20);
   button_state = PIND & all_buttons; //read state of buttons from register D.
 
-
+  randnumber ^=1;
   // Check if there is any change
   if (button_state == old_button_state) {
     delay(50);
