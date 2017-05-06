@@ -230,22 +230,22 @@ ISR( WDT_vect ) {
 
 void setup() {
   // initialize output on register A:
-  DDRA |= (TX_l | TX_r) & ~(1 << 9);
-  //DDRA |=00000111;  // All possible registers on A to output, to save battery.
+  //DDRA |= (TX_l | TX_r) & ~(1 << 9);
+  DDRA =0x111;  // All possible registers on A to output, to save battery.
   // initialize input on register A:
   // --
   // initialize output on register B:
-  DDRB |= (LED_zero | LED_one | LED_two | LED_act) & ~(1 << 8);
+  //DDRB |= (LED_zero | LED_one | LED_two | LED_act) & ~(1 << 8);
   // initialize input on register B:
-  DDRB &= ~(RX_r & ~(1 << 8));
-  //DDRB = 11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
+  //DDRB &= ~(RX_r & ~(1 << 8));
+  DDRB = 0b11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
   // initialize input on register D:
-  DDRD &= ~(all_buttons | RX_l);
-
+  //DDRD &= ~(all_buttons | RX_l);
+  DDRD= 0x10000000; 
   // internal pullup resistors for buttons and RX on register D:
-  PORTD |= (all_buttons | RX_l);
+  PORTD = 0x0 | (all_buttons | RX_l);
   // internal pullup resistors for RX on register B:
-  PORTB |= (RX_r & ~(1 << 8));
+  PORTB = 0x0 | (RX_r & ~(1 << 8)); //set output to 0
 
   // set TX HIGH
   PORTA |= ((TX_l | TX_r) & ~(1 << 9));
