@@ -1,4 +1,4 @@
-//#include <avr/interrupt.h>
+#include <avr/interrupt.h>
 #include <avr/sleep.h>
 #include <avr/power.h>
 
@@ -30,11 +30,31 @@ const uint16_t RX_r = 1 << 0 | 1 << 8; // B0
 
 
 
-// Variables:
-uint8_t internalState = 0;
-uint8_t logicalState = 0;
 
 
+void sleepnow()
+{
+  ACSR = 1<<ACD;
+  PRR= 0x0f;  // data sheet claims that the above two lines are not needed.
+  //MCUCR |= 1<<6 | 1<<4;
+  //DDRD |= RX_l;
+  //DDRB |= (RX_r & ~ (1<<8));
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+  power_all_disable ();
+  //MCUCR|= 1<<5;
+  sleep_enable();                //enable sleep mode, a safety pin
+  BODCR= 1<<1|1<<0;
+  BODCR=1<<1;
+  sei();
+  // for watchdog: else WDTCSR|=(1<<WDIE);
+  sleep_cpu();                  // go into sleep mode.
+  // interrupt
+  cli();
+  sleep_disable();              //disable sleep mode
+  power_all_enable();
+  //DDRD &= ~RX_l;
+  //DDRB &= ~ (RX_r & ~ (1<<8));
+}
 
 
 
@@ -90,7 +110,7 @@ void setup() {
   // initialize output on register B:
   DDRB |= (LED_zero | LED_one | LED_two | LED_act) & ~(1 << 8);
   // initialize input on register B:
-  DDRB &= ~(RX_r & ~(1 << 8));
+  DDRB &= ~(RX_r & ~(1 << 8)) ;
   //DDRB = 11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
   // initialize input on register D:
   DDRD &= ~(all_buttons | RX_l);
@@ -103,100 +123,69 @@ void setup() {
   // set TX HIGH
   PORTA |= ((TX_l | TX_r) & ~(1 << 9));
 
-  // initialize logical and internal state
-  logicalState = 1;
-  internalState = random(0, 2);
 
 
-  /*
+
+  
   // Pin change interrupt
+  
   cli();                      // turn interrupts off while changing them.
   GIMSK |= (1<<PCIE2);            // enable Pin interrupt on register D (see datasheet)
   PCMSK2 |= all_buttons;      // use any button for interrupt.
-  sei();                      // turn interrupts on.
-  */
+  //sei();                      // turn interrupts on.
+  
 }
 
 
-void lightup(){
-  Write(LED_zero, HIGH);
-  delay(50);
-  Write(LED_zero,LOW);
-  delay(180);
-  Write(LED_one, HIGH);
-  delay(50);
-  Write(LED_one,LOW);
-  delay(180);  
-  Write(LED_two, HIGH);
-  delay(50);
-  Write(LED_two,LOW);
-  delay(180);
-  Write(LED_act, HIGH);
-  delay(50);
-  Write(LED_act,LOW);
-}
 
 uint8_t old_button_state = all_buttons; // 0 on bit x iff button x pressed
 uint8_t button_state = all_buttons;
-uint8_t counter=0;
+uint8_t RX_r_state = HIGH;
+uint8_t RX_l_state = HIGH;
+uint8_t old_RX_r_state = HIGH;
+uint8_t old_RX_l_state = HIGH;
 
 void loop() {
-
+  
   button_state = PIND & all_buttons; //read state of buttons from register D.
-
-
-  // Check if there is any change
-  if (button_state == old_button_state) {
-    delay(50);
-    return;
+  RX_r_state= Read(RX_r);  // Read state from RX_r
+  RX_l_state=Read(RX_l);   // Read state from RX_l
+  
+  if (old_RX_l_state!= RX_l_state ){ // change on RX_l
+    if(RX_l_state==LOW) Write(LED_zero, HIGH);
+    else Write(LED_zero,LOW);
   }
-
-
-  if ((button_state & button_CZl) != (old_button_state & button_CZl) ){ //change on CZl
-    if ((button_state & button_CZl)!=button_CZl){ // button pressed
-      if (counter != 0) counter=0;  //counter not zero
-      else counter++; 
-    }
+  if (old_RX_r_state!= RX_r_state ){ // change on RX_r
+    if(RX_r_state==LOW) Write(LED_act, HIGH);
+    else Write(LED_act,LOW);
   }
   
-  else if ((button_state & button_H) != (old_button_state & button_H) ){ //  change on H
-    if ((button_state & button_H)!=button_H){
-      if (counter != 1) counter=0;
-      else counter++; 
+
+  if((button_state & button_CZl) != (old_button_state & button_CZl)){ //button CZl changed
+    if((button_state & button_CZl) == button_CZl){//button not pressed, i.e. HIGH
+      Write(TX_l, HIGH); 
+      Write(LED_one,LOW);
     }
-  }
-   
-  else if ((button_state & button_Z) != (old_button_state & button_Z) ){ // change on Z
-    if ((button_state & button_Z)!=button_Z){
-      if (counter != 2) counter=0;
-      else counter++; 
+    else { // button pressed
+      Write(TX_l, LOW);
+      Write(LED_one,HIGH);
     }
-  }
+  } 
   
-  else if ((button_state & button_P) != (old_button_state & button_P) ){ // change on P
-    if ((button_state & button_P)!=button_P){
-      if (counter != 3) counter=0;
-      else counter++; 
+  if((button_state & button_CZr) != (old_button_state & button_CZr)){ //button CZl changed
+    if((button_state & button_CZr) == button_CZr){//button not pressed, i.e. HIGH
+      Write(TX_r, HIGH); 
+      Write(LED_two,LOW);
+    }
+    else { // button pressed
+      Write(TX_r, LOW);
+      Write(LED_two,HIGH);
     }
   } 
-
-  else if ((button_state & button_CZr) != (old_button_state & button_CZr) ){ // change on CZr
-    if ((button_state & button_CZr)!=button_CZr){
-      if (counter != 4) counter=0;
-      else counter++; 
-    }
-  } 
-
-  else if ((button_state & button_M) != (old_button_state & button_M) ){ // change on M
-    if ((button_state & button_M)!=button_M){
-      if (counter == 5) lightup();
-      counter=0; 
-    }
-  } 
-
-  
   delay(50);
 
   old_button_state = button_state;
+  old_RX_r_state = RX_r_state;
+  old_RX_l_state = RX_l_state;
 
 }

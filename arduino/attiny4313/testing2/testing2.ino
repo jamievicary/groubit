@@ -104,12 +104,13 @@ void setup() {
 
 
 
-  /*
+  
   // Pin change interrupt
+  /*
   cli();                      // turn interrupts off while changing them.
   GIMSK |= (1<<PCIE2);            // enable Pin interrupt on register D (see datasheet)
   PCMSK2 |= all_buttons;      // use any button for interrupt.
-  sei();                      // turn interrupts on.
+  //sei();                      // turn interrupts on.
   */
 }
 
@@ -123,7 +124,7 @@ uint8_t old_RX_r_state = HIGH;
 uint8_t old_RX_l_state = HIGH;
 
 void loop() {
-
+  
   button_state = PIND & all_buttons; //read state of buttons from register D.
   RX_r_state= Read(RX_r);  // Read state from RX_r
   RX_l_state=Read(RX_l);   // Read state from RX_l

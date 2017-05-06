@@ -36,15 +36,17 @@ uint8_t logicalState = 0;
 uint8_t randloop=0;
 
 
-void sleep()
+void sleepnow()
 {
   ACSR = 1<<ACD;
-  PRR= 0xff;  // data sheet claims that the above two lines are not needed.
-  MCUCR |= 1<<6 | 1<<4;
-  //set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+  PRR= 0x0f;  // data sheet claims that the above two lines are not needed.
+  //MCUCR |= 1<<6 | 1<<4;
+  //DDRD |= RX_l;
+  //DDRB |= (RX_r & ~ (1<<8));
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
   power_all_disable ();
-  MCUCR|= 1<<5;
-  //sleep_enable();                //enable sleep mode, a safety pin
+  //MCUCR|= 1<<5;
+  sleep_enable();                //enable sleep mode, a safety pin
   BODCR= 1<<1|1<<0;
   BODCR=1<<1;
   sei();
@@ -54,6 +56,8 @@ void sleep()
   cli();
   sleep_disable();              //disable sleep mode
   power_all_enable();
+  //DDRD &= ~RX_l;
+  //DDRB &= ~ (RX_r & ~ (1<<8));
 }
 
 
@@ -225,27 +229,25 @@ void CZ_up(uint8_t left) {
 
 ISR(PCINT2_Vect){
 }
-ISR( WDT_vect ) {
-}
 
 void setup() {
   // initialize output on register A:
-  //DDRA |= (TX_l | TX_r) & ~(1 << 9);
-  DDRA =0x111;  // All possible registers on A to output, to save battery.
+  DDRA |= (TX_l | TX_r) & ~(1 << 9);
+  //DDRA =0x111;  // All possible registers on A to output, to save battery.
   // initialize input on register A:
   // --
   // initialize output on register B:
-  //DDRB |= (LED_zero | LED_one | LED_two | LED_act) & ~(1 << 8);
+  DDRB |= (LED_zero | LED_one | LED_two | LED_act) & ~(1 << 8);
   // initialize input on register B:
-  //DDRB &= ~(RX_r & ~(1 << 8));
-  DDRB = 0b11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
+  DDRB &= ~(RX_r & ~(1 << 8));
+  //DDRB = 0b11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
   // initialize input on register D:
-  //DDRD &= ~(all_buttons | RX_l);
-  DDRD= 0x10000000; 
+  DDRD &= ~(all_buttons | RX_l);
+  //DDRD= 0x10000000; 
   // internal pullup resistors for buttons and RX on register D:
-  PORTD = 0x0 | (all_buttons | RX_l);
+  PORTD |= (all_buttons | RX_l);
   // internal pullup resistors for RX on register B:
-  PORTB = 0x0 | (RX_r & ~(1 << 8)); //set output to 0
+  PORTB|= (RX_r & ~(1 << 8)); //set output to 0
 
   // set TX HIGH
   PORTA |= ((TX_l | TX_r) & ~(1 << 9));
@@ -279,7 +281,7 @@ uint8_t old_button_state = all_buttons; // 0 on bit x iff button x pressed
 uint8_t button_state = all_buttons;
 
 void loop() {
-  sleep();
+  sleepnow();
   randloop ^= 1;
   button_state = PIND & all_buttons; //read state of buttons from register D.
 
