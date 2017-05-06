@@ -263,13 +263,12 @@ void setup() {
 uint8_t button_state = all_buttons;
 
 void loop() {
-  sleepnow();
   delay(20);
   button_state = PIND & all_buttons; //read state of buttons from register D.
 
   
 
-  if (button_state & button_M == LOW){
+  if ((button_state & button_M) == LOW){
     M_down();
     Write(LED_act,HIGH);
     while(Read(button_M)==LOW) { delay(50); randloop ^=1;}
@@ -277,33 +276,35 @@ void loop() {
     M_up();
   }
 
-  else if (button_state & button_H == LOW){
+  else if ((button_state & button_H) == LOW){
     H_down();
     Wait(button_H);
     H_up();
   }
 
-  else if (button_state & button_Z == LOW){
+  else if ((button_state & button_Z) == LOW){
     Z_down();
     Wait(button_Z);
     Z_up();
   }
 
-  else if (button_state & button_P == LOW){
+  else if ((button_state & button_P) == LOW){
     P_down();
     Wait(button_P);
     P_up();
   }
 
-  else if (button_state & button_CZl == LOW){
+  else if ((button_state & button_CZl) == LOW){
     CZ_down(1);
   }
 
-  else if (button_state & button_CZr == LOW){
+  else if ((button_state & button_CZr) == LOW){
     CZ_down(0);
   }
 
   delay(50);
+
+  sleepnow();
 
   /*
   // Check if there is any change
