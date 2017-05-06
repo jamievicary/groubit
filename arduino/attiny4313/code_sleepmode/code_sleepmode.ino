@@ -39,27 +39,20 @@ uint8_t randloop=0;
 void sleepnow()
 {
   //ACSR = 1<<ACD;
-  //PRR= 0xff;  // data sheet claims that the above two lines are not needed.
-  //MCUCR |= 1<<6 | 1<<4;
-  //DDRD |= RX_l;
-  //DDRB |= (RX_r & ~ (1<<8));
+  //PRR= 0xff;  
   cli();
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);
   power_all_disable ();
-  //MCUCR|= 1<<5;
   sleep_enable();                //enable sleep mode, a safety pin
   BODCR= 1<<1|1<<0;
   BODCR=1<<1;
   GIFR |= 1<<PCIF2;
   sei();
-  // for watchdog: else WDTCSR|=(1<<WDIE);
   sleep_cpu();                  // go into sleep mode.
   // interrupt
   cli();
   sleep_disable();              //disable sleep mode
   power_all_enable();
-  //DDRD &= ~RX_l;
-  //DDRB &= ~ (RX_r & ~ (1<<8));
 }
 
 
@@ -264,41 +257,68 @@ void setup() {
   cli();                      // turn interrupts off while changing them.
   GIMSK |= (1<<PCIE2);            // enable Pin interrupt on register D (see datasheet)
   PCMSK2 |= all_buttons;      // use any button for interrupt.
-  
-  //sei();                      // turn interrupts on.
 
-
-  //Watchdog
-  /*
-  r mode
-  MCUSR &= ~(1 << WDRF);
-  WDTCSR |= (1 << WDCE) | (1 << WDE);
-  // means: enable changes and reset timer
-  WDTCSR = (1<< WDP1); //timer set to 64 ms.
-  */
 }
 
 
 
-uint8_t old_button_state = all_buttons; // 0 on bit x iff button x pressed
+//uint8_t old_button_state = all_buttons; // 0 on bit x iff button x pressed
 uint8_t button_state = all_buttons;
 
 void loop() {
-  /*
-  Write(LED_two,HIGH);
-  delay(1000);
-  Write(LED_two,LOW);
-  delay(1000);
-  Write(LED_two,HIGH);
-  delay(1000);
-  Write(LED_two,LOW);
-  delay(1000);
-  */
   sleepnow();
   delay(20);
   button_state = PIND & all_buttons; //read state of buttons from register D.
 
-  randnumber ^=1;
+  
+
+  if (button_state & button_M == LOW){
+    Write(LED_act,HIGH);
+    M_down();
+    while(Read(button_M)==LOW) randloop ^=1;
+    Write(LED_act,LOW);
+    M_up();
+  }
+
+  else if (button_state & button_H == LOW){
+    Write(LED_act,HIGH);
+    H_down();
+    while(Read(button_H)==LOW) randloop ^=1;
+    Write(LED_act,LOW);
+    H_up();
+  }
+
+  else if (button_state & button_Z == LOW){
+    Write(LED_act,HIGH);
+    Z_down();
+    while(Read(button_Z)==LOW) randloop ^=1;
+    Write(LED_act,LOW);
+    Z_up();
+  }
+
+  else if (button_state & button_P == LOW){
+    Write(LED_act,HIGH);
+    P_down();
+    while(Read(button_P)==LOW) randloop ^=1;
+    Write(LED_act,LOW);
+    P_up();
+  }
+
+  else if (button_state & button_CZl == LOW){
+    CZ_down(1);
+    while(Read(button_CZl)==LOW) randloop ^=1;
+    CZ_up(1);
+  }
+
+  else if (button_state & button_CZr == LOW){
+    CZ_down(0);
+    while(Read(button_CZr)==LOW) randloop ^=1;
+    CZ_up(0);
+  }
+
+  delay(50);
+
+  /*
   // Check if there is any change
   if (button_state == old_button_state) {
     delay(50);
@@ -337,11 +357,11 @@ void loop() {
     if ((button_state & button_CZr) == LOW) CZ_down(0);
     else CZ_up(0);
   }
-
+  
 
   // Delay a little bit to avoid bouncing
   delay(50);
 
   old_button_state = button_state;
-
+  */
 }
