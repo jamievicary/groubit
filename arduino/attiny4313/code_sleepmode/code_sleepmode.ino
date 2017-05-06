@@ -39,7 +39,7 @@ uint8_t randloop=0;
 void sleepnow()
 {
   ACSR = 1<<ACD;
-  PRR= 0x0f;  // data sheet claims that the above two lines are not needed.
+  PRR= 0xff;  // data sheet claims that the above two lines are not needed.
   //MCUCR |= 1<<6 | 1<<4;
   //DDRD |= RX_l;
   //DDRB |= (RX_r & ~ (1<<8));
@@ -281,6 +281,9 @@ uint8_t old_button_state = all_buttons; // 0 on bit x iff button x pressed
 uint8_t button_state = all_buttons;
 
 void loop() {
+  Write(LED_two,HIGH);
+  delay(20);
+  Write(LED_two,LOW);
   sleepnow();
   randloop ^= 1;
   button_state = PIND & all_buttons; //read state of buttons from register D.
