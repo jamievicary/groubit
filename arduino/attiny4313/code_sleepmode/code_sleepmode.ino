@@ -38,11 +38,13 @@ uint8_t randloop=0;
 
 void sleepnow()
 {
-  ACSR = 1<<ACD;
-  PRR= 0xff;  // data sheet claims that the above two lines are not needed.
+  //ACSR = 1<<ACD;
+  //PRR= 0xff;  // data sheet claims that the above two lines are not needed.
   //MCUCR |= 1<<6 | 1<<4;
   //DDRD |= RX_l;
   //DDRB |= (RX_r & ~ (1<<8));
+  cli();
+  GIFR |= 1<<PCIF2;
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);
   power_all_disable ();
   //MCUCR|= 1<<5;
@@ -262,6 +264,7 @@ void setup() {
   cli();                      // turn interrupts off while changing them.
   GIMSK |= (1<<PCIE2);            // enable Pin interrupt on register D (see datasheet)
   PCMSK2 |= all_buttons;      // use any button for interrupt.
+  
   //sei();                      // turn interrupts on.
 
 
@@ -281,9 +284,16 @@ uint8_t old_button_state = all_buttons; // 0 on bit x iff button x pressed
 uint8_t button_state = all_buttons;
 
 void loop() {
+  /*
   Write(LED_two,HIGH);
-  delay(20);
+  delay(1000);
   Write(LED_two,LOW);
+  delay(1000);
+  Write(LED_two,HIGH);
+  delay(1000);
+  Write(LED_two,LOW);
+  delay(1000);
+  */
   sleepnow();
   randloop ^= 1;
   button_state = PIND & all_buttons; //read state of buttons from register D.
