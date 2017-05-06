@@ -55,6 +55,8 @@ void sleepnow()
   power_all_enable();
 }
 
+ISR(PCINT2_Vect){
+}
 
 
 /* Function: Write
@@ -208,37 +210,31 @@ void CZ_down(uint8_t left) {
   }
 
   Write(TX, HIGH);
-}
-
-/* Function: CZ_up
-   ---------------------
-   'left': 1 or 0 for left or right CZ button
-    CZ not pressed
-*/
-void CZ_up(uint8_t left) {
   Write(LED_act, LOW);
-  if (left) Write(TX_l, HIGH);
-  else Write(TX_r, HIGH);
 }
 
 
-ISR(PCINT2_Vect){
+void Wait(uint8_t button_pin){
+  Write(LED_act,HIGH);
+  while(Read(button_pin)==LOW) delay(50);
+  Write(LED_act,LOW);
 }
+
+
+
+
 
 void setup() {
   // initialize output on register A:
   DDRA |= (TX_l | TX_r) & ~(1 << 9);
-  //DDRA =0x111;  // All possible registers on A to output, to save battery.
   // initialize input on register A:
   // --
   // initialize output on register B:
   DDRB |= (LED_zero | LED_one | LED_two | LED_act) & ~(1 << 8);
   // initialize input on register B:
   DDRB &= ~(RX_r & ~(1 << 8));
-  //DDRB = 0b11111111 & ~(RX_r & ~(1<<8)); // All except input pin to output.
   // initialize input on register D:
   DDRD &= ~(all_buttons | RX_l);
-  //DDRD= 0x10000000; 
   // internal pullup resistors for buttons and RX on register D:
   PORTD |= (all_buttons | RX_l);
   // internal pullup resistors for RX on register B:
@@ -262,6 +258,7 @@ void setup() {
 
 
 
+
 //uint8_t old_button_state = all_buttons; // 0 on bit x iff button x pressed
 uint8_t button_state = all_buttons;
 
@@ -273,47 +270,37 @@ void loop() {
   
 
   if (button_state & button_M == LOW){
-    Write(LED_act,HIGH);
     M_down();
-    while(Read(button_M)==LOW) randloop ^=1;
+    Write(LED_act,HIGH);
+    while(Read(button_M)==LOW) { delay(50); randloop ^=1;}
     Write(LED_act,LOW);
     M_up();
   }
 
   else if (button_state & button_H == LOW){
-    Write(LED_act,HIGH);
     H_down();
-    while(Read(button_H)==LOW) randloop ^=1;
-    Write(LED_act,LOW);
+    Wait(button_H);
     H_up();
   }
 
   else if (button_state & button_Z == LOW){
-    Write(LED_act,HIGH);
     Z_down();
-    while(Read(button_Z)==LOW) randloop ^=1;
-    Write(LED_act,LOW);
+    Wait(button_Z);
     Z_up();
   }
 
   else if (button_state & button_P == LOW){
-    Write(LED_act,HIGH);
     P_down();
-    while(Read(button_P)==LOW) randloop ^=1;
-    Write(LED_act,LOW);
+    Wait(button_P);
     P_up();
   }
 
   else if (button_state & button_CZl == LOW){
     CZ_down(1);
-    while(Read(button_CZl)==LOW) randloop ^=1;
-    CZ_up(1);
   }
 
   else if (button_state & button_CZr == LOW){
     CZ_down(0);
-    while(Read(button_CZr)==LOW) randloop ^=1;
-    CZ_up(0);
   }
 
   delay(50);
