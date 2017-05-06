@@ -35,6 +35,7 @@ uint8_t internalState = 0;
 uint8_t logicalState = 0;
 uint8_t randloop=0;
 
+void delay_ms(uint8_t t) delay(8*t);
 
 void sleepnow()
 {
@@ -257,17 +258,32 @@ void setup() {
 }
 
 
-
-
-//uint8_t old_button_state = all_buttons; // 0 on bit x iff button x pressed
-uint8_t button_state = all_buttons;
+uint8_t button_state = all_buttons;         // 0 on bit x iff button x pressed
 
 void loop() {
   delay(20);
   button_state = PIND & all_buttons; //read state of buttons from register D.
+  /*
+  Write(LED_act,HIGH);
+  delay(8000);
+  Write(LED_act,LOW);
+  delay(8000);
+    Write(LED_act,HIGH);
+  delay(8000);
+  Write(LED_act,LOW);
+  delay(8000);
+    Write(LED_act,HIGH);
+  delay(8000);
+  Write(LED_act,LOW);
+  delay(8000);
+    Write(LED_act,HIGH);
+  delay(8000);
+  Write(LED_act,LOW);
+  delay(8000);
+  */
+
 
   
-
   if ((button_state & button_M) == LOW){
     M_down();
     Write(LED_act,HIGH);
@@ -305,51 +321,4 @@ void loop() {
   delay(50);
 
   sleepnow();
-
-  /*
-  // Check if there is any change
-  if (button_state == old_button_state) {
-    delay(50);
-    return;
-  }
-
-  // Set activity LED
-  if ((button_state & ~(button_CZl | button_CZr))   == (all_buttons & ~ (button_CZl | button_CZr))) Write(LED_act, LOW); //no button pressed
-  else  Write(LED_act, HIGH);
-
-  if ((button_state & button_M) != (old_button_state & button_M)) {
-    if ((button_state & button_M) == LOW) M_down();
-    else M_up();
-  }
-  if ((button_state & button_H) != (old_button_state & button_H)) {
-    if ((button_state & button_H) == LOW) H_down();
-    else H_up();
-  }
-
-  if ((button_state & button_Z) != (old_button_state & button_Z)) {
-    if ((button_state & button_Z) == LOW) Z_down();
-    else Z_up();
-  }
-
-  if ((button_state & button_P) != (old_button_state & button_P)) {
-    if ((button_state & button_P) == LOW) P_down();
-    else P_up();
-  }
-
-  if ((button_state & button_CZl) != (old_button_state & button_CZl)) {
-    if ((button_state & button_CZl) == LOW) CZ_down(1);
-    else CZ_up(1);
-  }
-
-  if ((button_state & button_CZr) != (old_button_state & button_CZr)) {
-    if ((button_state & button_CZr) == LOW) CZ_down(0);
-    else CZ_up(0);
-  }
-  
-
-  // Delay a little bit to avoid bouncing
-  delay(50);
-
-  old_button_state = button_state;
-  */
 }
