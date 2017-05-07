@@ -2,6 +2,7 @@
 #include <avr/sleep.h>
 #include <avr/power.h>
 
+
 // buttons
 const uint16_t button_CZl = 1 << 0; //D0
 const uint16_t button_H   = 1 << 2; //D2
@@ -35,7 +36,7 @@ uint8_t internalState = 0;
 uint8_t logicalState = 0;
 uint8_t randloop=0;
 
-void delay_ms(uint8_t t) delay(8*t);
+void delay_ms(int t) {delay(4*t);}
 
 void sleepnow()
 {
@@ -197,15 +198,15 @@ void CZ_down(uint8_t left) {
   // while CZ is pressed
   while (Read(button_CZ) == LOW) {
     RX_state = Read(RX);
-    if (RX_state == HIGH) delay(10);
+    if (RX_state == HIGH) delay_ms(10);
     else {
       Write(LED_act, HIGH);
-      delay(100);
+      delay_ms(100);
       Write(TX, logicalState == 0 ? HIGH : LOW);
-      delay(50);
+      delay_ms(50);
       RX_state = Read(RX);
       if (RX_state == LOW) internalState = (internalState + 1) % 2;
-      delay(50);
+      delay_ms(50);
       break;
     }
   }
@@ -217,7 +218,7 @@ void CZ_down(uint8_t left) {
 
 void Wait(uint8_t button_pin){
   Write(LED_act,HIGH);
-  while(Read(button_pin)==LOW) delay(50);
+  while(Read(button_pin)==LOW) delay_ms(50);
   Write(LED_act,LOW);
 }
 
@@ -261,25 +262,26 @@ void setup() {
 uint8_t button_state = all_buttons;         // 0 on bit x iff button x pressed
 
 void loop() {
-  delay(20);
+  delay_ms(20);
   button_state = PIND & all_buttons; //read state of buttons from register D.
+
   /*
   Write(LED_act,HIGH);
-  delay(8000);
+  delay_ms(1000);
   Write(LED_act,LOW);
-  delay(8000);
+  delay_ms(1000);
+  Write(LED_act,HIGH);
+  delay_ms(1000);
+  Write(LED_act,LOW);
+  delay_ms(1000);
+  Write(LED_act,HIGH);
+  delay_ms(1000);
+  Write(LED_act,LOW);
+  delay_ms(1000);
     Write(LED_act,HIGH);
-  delay(8000);
+  delay_ms(1000);
   Write(LED_act,LOW);
-  delay(8000);
-    Write(LED_act,HIGH);
-  delay(8000);
-  Write(LED_act,LOW);
-  delay(8000);
-    Write(LED_act,HIGH);
-  delay(8000);
-  Write(LED_act,LOW);
-  delay(8000);
+  delay_ms(1000);
   */
 
 
@@ -287,7 +289,7 @@ void loop() {
   if ((button_state & button_M) == LOW){
     M_down();
     Write(LED_act,HIGH);
-    while(Read(button_M)==LOW) { delay(50); randloop ^=1;}
+    while(Read(button_M)==LOW) { delay_ms(50); randloop ^=1;}
     Write(LED_act,LOW);
     M_up();
   }
@@ -318,7 +320,8 @@ void loop() {
     CZ_down(0);
   }
 
-  delay(50);
+  delay_ms(50);
 
   sleepnow();
 }
+
