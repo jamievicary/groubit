@@ -21,15 +21,15 @@
   <sodipodi:namedview
      inkscape:current-layer="svg2"
      inkscape:window-maximized="0"
-     inkscape:window-y="572"
-     inkscape:window-x="908"
-     inkscape:cy="254.94373"
-     inkscape:cx="229.80413"
-     inkscape:zoom="1.6866097"
+     inkscape:window-y="15"
+     inkscape:window-x="262"
+     inkscape:cy="143.4383"
+     inkscape:cx="174.7024"
+     inkscape:zoom="2.3852263"
      showgrid="false"
      id="namedview1811"
-     inkscape:window-height="1037"
-     inkscape:window-width="2009"
+     inkscape:window-height="1029"
+     inkscape:window-width="1829"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0"
      guidetolerance="10"
@@ -46,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -54,18 +54,19 @@
      id="defs1813" />
   <g
      id="g6"
-     transform="translate(0,-625.89001)"
-     style="stroke:#000000;stroke-opacity:1;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
+     transform="matrix(1.0050416,0,0,1.0065574,-0.70794683,-630.70289)"
+     style="stroke:#000000;stroke-width:0.28346455;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
     <g
        id="board"
-       style="stroke:#000000;stroke-opacity:1;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
+       style="stroke:#000000;stroke-width:0.28346455;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
       <g
          id="g9"
-         style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
+         style="fill:none;stroke:#000000;stroke-width:0.28346455;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
         <path
-           style="fill:none;fill-opacity:0.2;stroke:#000000;stroke-opacity:1;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none"
+           style="fill:none;fill-opacity:0.2;stroke:#000000;stroke-width:0.28346455;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            d="m 14.1732,625.89001 252.45359,0 c 7.85195,0 14.1732,6.32125 14.1732,14.1732 l 0,187.6536 c 0,7.85196 -6.32125,14.1732 -14.1732,14.1732 l -252.45359,0 C 6.321247,841.89001 0,835.56877 0,827.71681 l 0,-187.6536 c 0,-7.85195 6.321247,-14.1732 14.1732,-14.1732 z"
-           id="boardoutline" />
+           id="boardoutline"
+           inkscape:connector-curvature="0" />
       </g>
     </g>
   </g>
@@ -80,15 +81,10 @@
       <g
          id="g124"
          style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
-        <circle
-           cx="6.13542"
-           cy="6.13542"
-           id="nonconn0"
-           r="4.53542"
-           style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none"
-           stroke-width="0"
-           stroke="#f9a435"
-           fill="black" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.28346455;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="M 10.67084,6.1354198 A 4.5354199,4.5354199 0 0 1 6.1354198,10.67084 4.5354199,4.5354199 0 0 1 1.5999999,6.1354198 4.5354199,4.5354199 0 0 1 6.1354198,1.5999999 4.5354199,4.5354199 0 0 1 10.67084,6.1354198 Z"
+           id="nonconn0" />
       </g>
     </g>
   </g>
@@ -103,15 +99,10 @@
       <g
          id="g131"
          style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
-        <circle
-           cx="6.13543"
-           cy="6.13543"
-           id="circle133"
-           r="4.53543"
-           style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none"
-           stroke-width="0"
-           stroke="#f9a435"
-           fill="black" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.28346455;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 10.67086,6.1354299 a 4.53543,4.53543 0 0 1 -4.5354301,4.5354301 4.53543,4.53543 0 0 1 -4.53543,-4.5354301 4.53543,4.53543 0 0 1 4.53543,-4.53543 4.53543,4.53543 0 0 1 4.5354301,4.53543 z"
+           id="circle133" />
       </g>
     </g>
   </g>
@@ -126,15 +117,10 @@
       <g
          id="g139"
          style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none">
-        <circle
-           cx="6.13543"
-           cy="6.13543"
-           id="circle141"
-           r="4.53543"
-           style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none"
-           stroke-width="0"
-           stroke="#f9a435"
-           fill="black" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.28346455;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 10.67086,6.1354299 a 4.53543,4.53543 0 0 1 -4.5354301,4.5354301 4.53543,4.53543 0 0 1 -4.53543,-4.5354301 4.53543,4.53543 0 0 1 4.53543,-4.53543 4.53543,4.53543 0 0 1 4.5354301,4.53543 z"
+           id="circle141" />
       </g>
     </g>
   </g>
@@ -149,15 +135,10 @@
       <g
          id="g147"
          style="stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none;stroke:#000000;stroke-opacity:1">
-        <circle
-           cx="6.13543"
-           cy="6.13543"
-           id="circle149"
-           r="4.53543"
-           style="stroke:#000000;stroke-opacity:1;fill:none;stroke-width:0.28346456;stroke-miterlimit:4;stroke-dasharray:none"
-           stroke-width="0"
-           stroke="#f9a435"
-           fill="black" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.28346455;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 10.67086,6.1354299 a 4.53543,4.53543 0 0 1 -4.5354301,4.5354301 4.53543,4.53543 0 0 1 -4.53543,-4.5354301 4.53543,4.53543 0 0 1 4.53543,-4.53543 4.53543,4.53543 0 0 1 4.5354301,4.53543 z"
+           id="circle149" />
       </g>
     </g>
   </g>
