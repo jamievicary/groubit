@@ -2,6 +2,7 @@
 #include <avr/sleep.h>
 #include <avr/power.h>
 
+
 // buttons
 const uint16_t button_CZl = 1 << 0; //D0
 const uint16_t button_H   = 1 << 2; //D2
@@ -35,6 +36,7 @@ uint8_t internalState = 0;
 uint8_t logicalState = 0;
 uint8_t randloop=0;
 
+void delay_ms(int t) {delay(4*t);}
 
 void sleepnow()
 {
@@ -196,15 +198,15 @@ void CZ_down(uint8_t left) {
   // while CZ is pressed
   while (Read(button_CZ) == LOW) {
     RX_state = Read(RX);
-    if (RX_state == HIGH) delay(10);
+    if (RX_state == HIGH) delay_ms(10);
     else {
       Write(LED_act, HIGH);
-      delay(100);
+      delay_ms(100);
       Write(TX, logicalState == 0 ? HIGH : LOW);
-      delay(50);
+      delay_ms(50);
       RX_state = Read(RX);
       if (RX_state == LOW) internalState = (internalState + 1) % 2;
-      delay(50);
+      delay_ms(50);
       break;
     }
   }
@@ -216,7 +218,7 @@ void CZ_down(uint8_t left) {
 
 void Wait(uint8_t button_pin){
   Write(LED_act,HIGH);
-  while(Read(button_pin)==LOW) delay(50);
+  while(Read(button_pin)==LOW) delay_ms(50);
   Write(LED_act,LOW);
 }
 
@@ -257,98 +259,69 @@ void setup() {
 }
 
 
-
-
-//uint8_t old_button_state = all_buttons; // 0 on bit x iff button x pressed
-uint8_t button_state = all_buttons;
+uint8_t button_state = all_buttons;         // 0 on bit x iff button x pressed
 
 void loop() {
-  sleepnow();
-  delay(20);
+  delay_ms(20);
   button_state = PIND & all_buttons; //read state of buttons from register D.
 
-  
+  /*
+  Write(LED_act,HIGH);
+  delay_ms(1000);
+  Write(LED_act,LOW);
+  delay_ms(1000);
+  Write(LED_act,HIGH);
+  delay_ms(1000);
+  Write(LED_act,LOW);
+  delay_ms(1000);
+  Write(LED_act,HIGH);
+  delay_ms(1000);
+  Write(LED_act,LOW);
+  delay_ms(1000);
+    Write(LED_act,HIGH);
+  delay_ms(1000);
+  Write(LED_act,LOW);
+  delay_ms(1000);
+  */
 
-  if (button_state & button_M == LOW){
+
+  
+  if ((button_state & button_M) == LOW){
     M_down();
     Write(LED_act,HIGH);
-    while(Read(button_M)==LOW) { delay(50); randloop ^=1;}
+    while(Read(button_M)==LOW) { delay_ms(50); randloop ^=1;}
     Write(LED_act,LOW);
     M_up();
   }
 
-  else if (button_state & button_H == LOW){
+  else if ((button_state & button_H) == LOW){
     H_down();
     Wait(button_H);
     H_up();
   }
 
-  else if (button_state & button_Z == LOW){
+  else if ((button_state & button_Z) == LOW){
     Z_down();
     Wait(button_Z);
     Z_up();
   }
 
-  else if (button_state & button_P == LOW){
+  else if ((button_state & button_P) == LOW){
     P_down();
     Wait(button_P);
     P_up();
   }
 
-  else if (button_state & button_CZl == LOW){
+  else if ((button_state & button_CZl) == LOW){
     CZ_down(1);
   }
 
-  else if (button_state & button_CZr == LOW){
+  else if ((button_state & button_CZr) == LOW){
     CZ_down(0);
   }
 
-  delay(50);
+  delay_ms(50);
 
-  /*
-  // Check if there is any change
-  if (button_state == old_button_state) {
-    delay(50);
-    return;
-  }
-
-  // Set activity LED
-  if ((button_state & ~(button_CZl | button_CZr))   == (all_buttons & ~ (button_CZl | button_CZr))) Write(LED_act, LOW); //no button pressed
-  else  Write(LED_act, HIGH);
-
-  if ((button_state & button_M) != (old_button_state & button_M)) {
-    if ((button_state & button_M) == LOW) M_down();
-    else M_up();
-  }
-  if ((button_state & button_H) != (old_button_state & button_H)) {
-    if ((button_state & button_H) == LOW) H_down();
-    else H_up();
-  }
-
-  if ((button_state & button_Z) != (old_button_state & button_Z)) {
-    if ((button_state & button_Z) == LOW) Z_down();
-    else Z_up();
-  }
-
-  if ((button_state & button_P) != (old_button_state & button_P)) {
-    if ((button_state & button_P) == LOW) P_down();
-    else P_up();
-  }
-
-  if ((button_state & button_CZl) != (old_button_state & button_CZl)) {
-    if ((button_state & button_CZl) == LOW) CZ_down(1);
-    else CZ_up(1);
-  }
-
-  if ((button_state & button_CZr) != (old_button_state & button_CZr)) {
-    if ((button_state & button_CZr) == LOW) CZ_down(0);
-    else CZ_up(0);
-  }
-  
-
-  // Delay a little bit to avoid bouncing
-  delay(50);
-
-  old_button_state = button_state;
-  */
+  sleepnow();
 }
+
