@@ -24,7 +24,8 @@
 \tikzset{string/.style={line width=0.7pt}}
 \tikzset{button/.style={draw, line width=0.7pt, minimum height=0.6cm, minimum width=0.6cm, inner sep=0pt}}
 \tikzset{M/.style={button, fill=red!70}}
-\tikzset{H/.style={button, fill=blue!60!white}}
+\definecolor{myblue}{rgb}{0.1,0.5,1}
+\tikzset{H/.style={button, fill=myblue}}
 \tikzset{P/.style={button, fill=black}}
 \tikzset{Z/.style={button, fill=green!95!black}}
 \tikzset{CZ/.style={button, fill=white, minimum width=2.6cm}}
@@ -133,9 +134,12 @@ We write our quantum programs using pictures.
 
 Introduction to entanglement
 
-Build entangled states
+First activity: make some entangled states
 
-Show that entangled qubits give the same measurement results
+Second activity: show that measuring them gives the same results
+
+Make clear that if you do anything with the qubits after you've measured them, the entanglement is broken.
+
 
 \[
 \begin{tikzpicture}[xscale=2]
@@ -164,7 +168,7 @@ Imagine you wanted to send your friend a single number, either a ``0'' or a ``1'
 Yes! Just press \inlineH then \inlineM until you get the number you want.
 
 \vspace{7pt}
-Then pass the qubit along to your friend.
+Then pass the qubit to your friend.
 
 \vspace{7pt}
 They can press \inlineM to discover the message.
@@ -183,13 +187,13 @@ Could you send your friend \emph{two numbers} by passing them one qubit?
 \frametitle{SENDING MESSAGES}
 
 \col{0.45}{
-You can use entanglement to send two numbers
+With entanglement, you can use one qubit to send \textit{two numbers}.
 
 \vspace{20pt}
-You can use one qubit to send \textit{two numbers}.
+Get into pairs. Choose who will be the sender and receiver.
 
 \vspace{20pt}
-Decide on your message ``A B''.
+The sender secretly chooses a first number (0 or 1), and a second number (0 or 1).
 
 \vspace{20pt}
 We will use this quantum program.
@@ -202,10 +206,10 @@ We will use this quantum program.
 \draw [string] (0,2.5) to (0,5.3) to [out=up, in=down, looseness=0.5] node [align=center, sloped, above, font=\it] {give qubit to\\[-2pt]your friend} (\xgap-1,6.2) to +(0,2);
 \draw [string] (\xgap,2.5) to (\xgap,8.2);
 \node [Z] at (0,3) {Z};
-\node [side note] at (0,3) {only if\\[-1pt]A is 1};
+\node [side note] at (0,3) {only if second\\[-1pt]number is 1};
 \node [H] at (0,4) {H};
 \node [Z] at (0,5) {Z};
-\node [side note] at (0,5) {only if\\[-1pt]B is 1};
+\node [side note] at (0,5) {only if first\\[-1pt]number is 1};
 \draw [string, dashed] (0,2.5) to +(0,-0.75);
 \draw [string, dashed] (\xgap,2.5) to +(0,-0.75);
 \node [align=center, font=\it] at (0.5*\xgap,2) {start with a pair of\\[-1pt]entangled qubits};
