@@ -1,16 +1,45 @@
 %
+
 \documentclass[aspectratio=169]{beamer}
 
 \usepackage{tikz}
+\usepackage{xspace}
+\usepackage{graphicx}
 
 \setbeamercovered{invisible}
 \usenavigationsymbolstemplate{}
 
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \large\insertframenumber\hspace*{1ex} 
+  \end{beamercolorbox}}%
+  \vskip3pt%
+}
+\makeatother
+
+\tikzset{string/.style={line width=0.7pt}}
+\tikzset{button/.style={draw, line width=0.7pt, minimum height=0.6cm, minimum width=0.6cm, inner sep=0pt}}
+\tikzset{M/.style={button, fill=red!70}}
+\tikzset{H/.style={button, fill=blue!60!white}}
+\tikzset{P/.style={button, fill=black}}
+\tikzset{Z/.style={button, fill=green!95!black}}
+\tikzset{CZ/.style={button, fill=white, minimum width=2.6cm}}
+\tikzset{result/.style={red, left=0.3cm}}
+\newcommand\inlinebutton[1]{$\smash{\begin{aligned}\tikz{\node [#1] {#1};}\end{aligned}}$\xspace}
+\newcommand\inlineM{\inlinebutton{M}}
+\newcommand\inlineH{\inlinebutton{H}}
+\newcommand\inlineP{\inlinebutton{P}}
+\newcommand\inlineZ{\inlinebutton{Z}}
 
 \begin{document}
 
+{
+\setbeamertemplate{footline}{} % Prevent title slide having a number
 \begin{frame}
-
 \vspace{-20pt}
 \[
 \hspace{-2cm}
@@ -19,16 +48,20 @@
   \path [fill=\y] (0,\x) rectangle +(\textwidth,1);
 }
 \path [use as bounding box] (current bounding box.south west) rectangle (current bounding box.north east);
-\node [scale=2.5, white, yscale=4.04] at (0.5*\textwidth,2.23) {\Huge\bf QUBIT.ZONE};
+\node [scale=2.5, white, yscale=3.04] at (0.5*\textwidth,2.29) {\Huge\bf QUBIT.ZONE};
 \end{tikzpicture}
 \hspace{-2cm}
 \]
 
 \end{frame}
+}
+
+% Make subsequent slides start from 1
+\addtocounter{framenumber}{-1}
 
 \usebackgroundtemplate{$\begin{tikzpicture}[xscale=1.2, yscale=1.8]
-\foreach \x/\y in {0/red,1/orange,2/yellow,3/green,4/blue} {
-  \path [fill=\y!10] (0,\x) rectangle +(\textwidth,1);
+\foreach \x/\y/\z in {0/red/10,1/orange/13,2/yellow/14,3/green/10,4/blue/10} {
+  \path [fill=\y!\z] (0,\x) rectangle +(\textwidth,1);
 }
 \end{tikzpicture}$}
 
@@ -38,27 +71,141 @@
 \begin{frame}
 \frametitle{QUANTUM COMPUTERS}
 
-Scientists around the world are racing to build the first \textit{quantum computer}. PICTURE.
+\begin{minipage}{0.5\textwidth}\raggedright
+Scientists around the world are racing to build the first \textit{quantum computer}.
+\end{minipage}
+\begin{minipage}{0.4\textwidth}\raggedright
+\includegraphics[height=3cm]{images/quantum_atom_in_room.png}
+\end{minipage}
 
 \vspace{15pt}
 Over the next 100 years, they will transform our civilization, giving us incredible new powers of ... DRUG DESIGN, OPTIMIZATION, DATA ANALYSIS, BREAKING ENCRYPTION, ARTIFICIAL INTELLIGENCE. [INSERT PICTURES FROM DALHOUSIE TALK.]
 
+\vspace{15pt}
+Today we will investigate some of the basic principles of quantum computers.
+
 \end{frame}
+
+\newcommand\col[2]{\begin{minipage}{#1\textwidth}\raggedright #2\end{minipage}}
 
 \begin{frame}
 \frametitle{QUBITS}
 
-Ordinary computers are built from \textit{bits}, which can equal 0 or 1. PICTURE.
+\col{0.5}{
+Ordinary computers are built from \textit{bits}, which can equal 0 or 1.
 
 \vspace{10pt}
 Quantum computers will be built from \textit{qubits}. You've got one in front of you!
-\[
-\text{[PICTURE]}
-\]
-It has got lots of mysterious buttons. Give them a try.
 
 \vspace{10pt}
-We will use these later to \textit{program} the qubit.
+It has got lots of mysterious buttons.
+\\
+Give them a try.
+
+\vspace{10pt}
+We will use these buttons to tell the qubit what to do.
+}
+\col{0.4}{\includegraphics[height=6cm]{images/qubit_1.png}}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{SUPERPOSITION}
+
+In the everyday world, 
+
+\end{frame}
+
+\begin{frame}
+\frametitle{QUANTUM PROGRAMS}
+
+We write our quantum programs using pictures.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{ENTANGLEMENT}
+
+Introduction to entanglement
+
+Build entangled states
+
+Show that entangled qubits give the same measurement results
+
+\[
+\begin{tikzpicture}[xscale=2]
+\draw [string] (0,-0.75) to +(0,4.5);
+\draw [string] (1,-0.75) to +(0,4.5);
+\path (1,0) node [M] {M} node [result] {0};
+\path (0,0) node [M] {M} node [result] {0};
+\node [H] at (0,1) {H};
+\node [H] at (1,1) {H};
+\node [CZ] at (0.5,2) {CZ};
+\node [H] at (1,3) {H};
+\end{tikzpicture}
+\]
+
+\end{frame}
+
+\begin{frame}
+\frametitle{SENDING MESSAGES}
+
+Imagine you wanted to send your friend a single number, either a ``0'' or a ``1''.
+
+\vspace{10pt}
+\textit{Could you do this using a qubit?}
+
+\vspace{25pt}
+Yes! Just press \inlineH then \inlineM until you get the number you want.
+
+\vspace{10pt}
+Then pass the qubit along to your friend.
+
+\vspace{10pt}
+They can press \inlineM to discover the message.
+
+\vspace{25pt}
+\textbf{Let's try it!}
+
+\end{frame}
+
+\tikzset{side note/.style={align=center, left=0.5cm, font=\it}}
+
+\begin{frame}
+\frametitle{SENDING MESSAGES}
+
+\col{0.45}{
+If you and your friend share a pair of entangled qubits, you can do more.
+
+\vspace{20pt}
+You can use one qubit to send \textit{two numbers}.
+
+\vspace{20pt}
+To send the message {\em``$A\ B$''}, we use this quantum program.
+}
+\col{0.4}{
+
+\[
+\begin{tikzpicture}[xscale=1, rotate=0, every node/.style={rotate=0}]
+\def\xgap{4}
+\draw [string] (0,2.5) to (0,5.3) to [out=up, in=down, looseness=0.5] node [align=center, sloped, above, font=\it] {give qubit to\\[-2pt]your friend} (\xgap-1,6.2) to +(0,2);
+\draw [string] (\xgap,2.5) to (\xgap,8.2);
+\node [Z] at (0,3) {Z};
+\node [side note] at (0,3) {only if\\[-1pt]A is 1};
+\node [H] at (0,4) {H};
+\node [Z] at (0,5) {Z};
+\node [side note] at (0,5) {only if\\[-1pt]B is 1};
+\draw [string, dashed] (0,2.5) to +(0,-0.75);
+\draw [string, dashed] (\xgap,2.5) to +(0,-0.75);
+\node [align=center, font=\it] at (0.5*\xgap,2) {start with a pair of\\[-1pt]entangled qubits};
+\node [CZ, minimum width=1.6cm] at (\xgap-0.5,6.5) {CZ};
+\node [H] at (\xgap,7.5) {H};
+\node [H] at (\xgap-1,7.5) {H};
+\node [M] at (\xgap,8.5) {M};
+\node [M] at (\xgap-1,8.5) {M};
+\end{tikzpicture}
+\]
+}
 
 \end{frame}
 
