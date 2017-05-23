@@ -26,10 +26,10 @@
 \tikzset{M/.style={button, fill=red!70}}
 \definecolor{myblue}{rgb}{0.1,0.5,1}
 \tikzset{H/.style={button, fill=myblue}}
-\tikzset{P/.style={button, fill=black}}
+\tikzset{P/.style={button, fill=black,text=white}}
 \tikzset{Z/.style={button, fill=green!95!black}}
-\tikzset{CZ/.style={button, fill=white, minimum height=1.6cm}}
-\tikzset{result/.style={red, above=0.225cm}}
+\tikzset{CZ/.style args={#1}{button, fill=white, minimum height=#1cm+0.6cm }}
+\tikzset{result/.style={red, above=0.24cm}}
 \newcommand\inlinebutton[1]{$\smash{\begin{aligned}\tikz{\node [#1] {#1};}\end{aligned}}$\xspace}
 \newcommand\inlineM{\inlinebutton{M}}
 \newcommand\inlineH{\inlinebutton{H}}
@@ -71,7 +71,7 @@
 
 \begin{frame}
 \frametitle{OUR QUANTUM WORLD}
-- EVERYDAY WORLD = CLASSICAL, TINYIEST THINGS BEHAVE DIFFERENTLY.\\
+- EVERYDAY WORLD = CLASSICAL, TINIEST THINGS BEHAVE DIFFERENTLY.\\
 -....\\
 - WHAT CAN WE DO WITH THIS?
 \end{frame}
@@ -105,19 +105,19 @@ Today we will investigate some of the basic principles of quantum computers.
 \end{frame}
 \begin{frame}
 \frametitle{QUBITS}
-
+\vspace{25pt}
 \col{0.5}{
 Ordinary computers are built from \textit{bits}, which can equal 0 or 1.
 
-\vspace{10pt}
+\vspace{25pt}
 Quantum computers will be built from \textit{qubits}. You've got one in front of you!
 
-\vspace{10pt}
+\vspace{25pt}
 It has got lots of mysterious buttons.
 \\
 Give them a try.
 
-\vspace{10pt}
+\vspace{25pt}
 We will use these buttons to tell the qubit what to do.
 }
 \col{0.4}{\includegraphics[height=6cm]{images/qubit_1.png}}
@@ -142,14 +142,34 @@ Be clear: If you press H then M repeatedly, get any number that you want.
 
 \begin{frame}
 \frametitle{QUANTUM PROGRAMS}
-A quantum program is a recipe which buttons have to be pressed in which order.\\
-Here's an example:\\
-horizontal line: HPZZH\\
-This means: press H , then press Z.\\
-Sometimes use more than one qubit:\\
-generic 2-qubit circuit.\\
-Network cable, press buttons at the same time.\\
-NOTATION MEASUREMENT??
+\vspace{25pt}
+A \textit{quantum program} is a recipe which tells you which buttons have to be pressed in which order. Here's an example:
+\vspace{25pt}
+\[ \begin{tikzpicture}[xscale=3]
+\draw[string](0,0) to +(3,0);
+\node[H] at (0.5,0) {H};
+\node[P] at (1,0) {P};
+\node[Z] at (1.5,0) {Z};
+\node[Z] at (2,0) {Z};
+\node[H] at (2.5,0){H};
+\end{tikzpicture}
+\]
+
+\vspace{10pt}Usually, quantum programs use more than one qubit:
+\vspace{10pt}
+\[ \begin{tikzpicture}[xscale=3]
+\draw[string] (0,0) to + (3,0);
+\draw[string] (0,1) to + (3,0);
+\node[H] at (0.5,0) {H};
+\node[Z] at (0.5,1) {Z};
+\node[P] at (1.5,1) {P};
+\node[Z] at (1.5,0) {Z};
+\node[Z] at (2.5,1) {Z};
+\node[H] at (2.5,0){H};
+\node[CZ={1}] at (2,0.5) {CZ};
+\node[CZ={1}] at (1,0.5) {CZ};
+\end{tikzpicture}
+\]
 \end{frame}
 
 \begin{frame}
@@ -161,26 +181,25 @@ Physics\\
 \begin{frame}
 \frametitle{ENTANGLEMENT}
 
-Introduction to entanglement
 
-First activity: make some entangled states
+Let's make an entangled state!
 
-Second activity: show that measuring them gives the same results
-
-Make clear that if you do anything with the qubits after you've measured them, the entanglement is broken.
 
 \[ \begin{tikzpicture}[xscale=2]
-\draw[string] (-0.5,0) to + (3.5,0);
-\draw[string] (-0.5,1) to + (3.5,0);
+\draw[string] (-0.5,0) to + (4,0);
+\draw[string] (-0.5,1.5) to + (4,0);
 \node[H] at (1,0) {H};
-\node[H] at (1,1) {H};
+\node[H] at (1,1.5) {H};
 \node[H] at (3,0){H};
-\path (0,1) node [M] {M} node [result] {0};
+\path (0,1.5) node [M] {M} node [result] {0};
 \path (0,0) node [M] {M} node [result] {0};
-\node[CZ] at (2,0.5) {CZ};
+\node[CZ={1.5}] at (2,0.75) {CZ};
 \end{tikzpicture}
 \]
 
+\vspace{20pt} Your qubits are now entangled - measuring one of them will yield the same result as measuring the other one.
+
+%Make clear that if you do anything with the qubits after you've measured them, the entanglement is broken.
 
 \end{frame}
 
@@ -213,44 +232,47 @@ Could you send your friend \emph{two numbers} by passing them one qubit?
 
 \end{frame}
 
-\tikzset{side note/.style={align=center, left=0.5cm, font=\it}}
+\tikzset{top note/.style={align=center, above=0.35cm, font=\it}}
 
 \begin{frame}
 \frametitle{SENDING NUMBERS}
-
-\col{0.45}{
-With entanglement, you can use one qubit to send \textit{two numbers}.
-
-\vspace{20pt}
-Get into pairs. Choose who will be the sender and receiver.
+\begin{columns}[t]
+\column{0.45\textwidth}{
+\noindent With entanglement, you can use one qubit to send \textit{two numbers}.\\
+ Get into pairs. Choose who will be the sender and receiver.
 
 }
-\col{0.45}{
+\column{0.45\textwidth}{
 The sender secretly chooses a first number (0 or 1), and a second number (0 or 1).
 
-\vspace{20pt}
-We will use this quantum program.
+
 }
+\end{columns}
 
 
 \[
-\begin{tikzpicture}[xscale=1, rotate=-90, every node/.style={rotate=0}]
-\def\xgap{3}
-\draw [string] (0,2.5) to (0,5.3) to [out=up, in=down, looseness=0.5] node [align=center, sloped, font=\it] {give qubit to\\[-2pt]your\! ~friend} (\xgap-1,6.2) to +(0,2);
-\draw [string] (\xgap,2.5) to (\xgap,8.2);
-\node [Z] at (0,3) {Z};
-\node [side note] at (0,3) {only if second\\[-1pt]number is 1};
-\node [H] at (0,4) {H};
-\node [Z] at (0,5) {Z};
-\node [side note] at (0,5) {only if first\\[-1pt]number is 1};
-\draw [string, dashed] (0,2.5) to +(0,-0.75);
-\draw [string, dashed] (\xgap,2.5) to +(0,-0.75);
-\node [align=center, font=\it] at (0.5*\xgap,2) {start with a pair of\\[-1pt]entangled qubits};
-\node [CZ] at (\xgap-0.5,6.5) {CZ};
-\node [H] at (\xgap,7.5) {H};
-\node [H] at (\xgap-1,7.5) {H};
-\node [M] at (\xgap,8.5) {M};
-\node [M] at (\xgap-1,8.5) {M};
+\def\scl{0.8}
+\begin{tikzpicture}[scale=\scl, rotate=-90, every node/.style={rotate=0}]
+\def\xgap{2.8}
+\draw [string] (0,-0.5) to (0,5) to [out=up, in=down, looseness=0.5] node [align=center, sloped, font=\it] {give qubit to\\[-2pt]your friend} (\xgap-1,7) to +(0,3.5);
+\draw [string] (\xgap,-0.5) to (\xgap,10.5);
+\node [Z] at (0,0.5) {Z};
+\node [top note] at (0,4.5) {only if second\\[-1pt]number is 1};
+\node [H] at (0,2.5) {H};
+\node [Z] at (0,4.5) {Z};
+\node [top note] at (0,0.5) {only if first\\[-1pt]number is 1};
+\draw [string, dashed] (0,-0.5) to +(0,-0.75);
+\draw [string, dashed] (\xgap,-0.5) to +(0,-0.75);
+\node [align=center, font=\it] at (0.5*\xgap,-0.9) {start with a pair of\\[-1pt]entangled qubits};
+\node [CZ ={\scl}] at (\xgap-0.5,7.5) {CZ};
+\node [H] at (\xgap,9.) {H};
+\node [H] at (\xgap-1,9) {H};
+\node [M] at (\xgap,10.5) {M};
+\node [M] at (\xgap-1,10.5) {M};
+\draw[dashed,->] (\xgap-1, 11.2) to +(0,0.5);
+\draw[dashed,->] (\xgap, 11.2) to +(0,0.5);
+\node[align=center, font=\it, right=0.01cm] at (\xgap-1, 11.7) {2nd number};
+\node[align=center, font=\it, right=0.01cm] at (\xgap, 11.7) {1st number};
 \end{tikzpicture}
 \]
 \vspace{-1cm}
@@ -267,13 +289,38 @@ We will use this quantum program.
 \end{frame}
 \begin{frame}
 \frametitle{TELEPORTATION}
-- Let's do that with our qubits.
+
+\text{ Get into pairs. Choose who will be the sender and receiver.}
+
+\tikzset{bottom note/.style={align=center, below=0.35cm, font=\it}}
 \[
 \begin{tikzpicture}
-\draw[string] (0,0) to +(4,0);
+\def\ygap{3}
+\draw[string] (-2,0) to +(5,0);
+\draw[string] (-1,-1) to + (4,0);
+\draw[string,dashed] (-2,-1) to +(1,0);
+\draw[string,dashed] (-2,-1-\ygap) to +(1,0);
+\draw[string] (-1,-1-\ygap) to + (10,0);
+\node[CZ={1}] at (0.,-0.5) {CZ};
+\node[H] at (1.5,-1) {H};
+\node[H] at (1.5,0) {H};
+\node[M] at (3,0) {M};
+\node[M] at (3,-1) {M};
+\node[Z] at (5,-1-\ygap) {Z};
+\node[H] at (6.5,-1-\ygap) {H};
+\node[Z] at (8,-1-\ygap) {Z};
+\draw[dashed,->] (3.6,-1) to [out = right, in=up, looseness=0.9] (5,-0.4-\ygap);
+\draw[dashed,->] (3.6,0) to [out = right, in=up, looseness=1.3] (7.5,-0.4-\ygap);
+\node [align=center, font=\it] at (-1.5,-1-0.5*\ygap) {start with a pair of\\[-1pt]entangled qubits};
+\draw[dashed, ->] (-3,0) to (-2.5,0);
+\node[align=center, font=\it] at (-4,0) {your qubit};
+\node[align=center,font=\it,rotate=10] at (5.9, -1-0.25*\ygap) {tell your friend your \\[-2pt] measurement outcomes};
+
+\node [bottom note] at (5,-1-\ygap) {only if this\\[-1pt]outcome was 1};
+\node [bottom note] at (8,-1-\ygap) {only if this\\[-1pt]outcome was 1};
 \end{tikzpicture}
 \]
-- Hard to tell whether it worked.
+
 \end{frame}
 
 \begin{frame}
