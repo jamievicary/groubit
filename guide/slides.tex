@@ -1,13 +1,33 @@
 %
 
-\documentclass[aspectratio=169]{beamer}
+\documentclass[handout,aspectratio=169]{beamer}
 
 \usepackage{tikz}
 \usepackage{xspace}
 \usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{calc}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings,snakes}
 
 \setbeamercovered{invisible}
 \usenavigationsymbolstemplate{}
+
+\newlength\pw
+\setlength\pw{16cm}
+\newlength\rw
+\newlength\lw
+\newcommand\splitpage[3]{
+\begin{minipage}{#1\pw}
+    \raggedright #2
+\end{minipage}
+\setlength\lw{#1\pw}
+\setlength\rw{13cm-\lw}
+\begin{minipage}{\rw}
+    \raggedright #3
+\end{minipage}
+}
+\newcommand\vgap{\vspace{5pt}}
 
 \makeatletter
 \setbeamertemplate{footline}
@@ -21,6 +41,8 @@
 }
 \makeatother
 
+\newcommand\picturefamily[1]{\ensuremath{\begin{tikzpicture}[outer sep=0pt,inner sep=0pt]#1\end{tikzpicture}}}
+
 \tikzset{string/.style={line width=0.7pt}}
 \tikzset{button/.style={draw, line width=0.7pt, minimum height=0.6cm, minimum width=0.6cm, inner sep=0pt}}
 \tikzset{M/.style={button, fill=red!70}}
@@ -28,14 +50,24 @@
 \tikzset{H/.style={button, fill=myblue}}
 \tikzset{P/.style={button, fill=black,text=white}}
 \tikzset{Z/.style={button, fill=green!95!black}}
+\tikzset{miniCZ/.style={button, fill=white}}
 \tikzset{CZ/.style args={#1}{button, fill=white, minimum height=#1cm+0.6cm }}
 \tikzset{result/.style={red, above=0.24cm}}
-\newcommand\inlinebutton[1]{$\smash{\begin{aligned}\tikz{\node [#1] {#1};}\end{aligned}}$\xspace}
-\newcommand\inlineM{\inlinebutton{M}}
-\newcommand\inlineH{\inlinebutton{H}}
-\newcommand\inlineP{\inlinebutton{P}}
-\newcommand\inlineZ{\inlinebutton{Z}}
+\newcommand\inlinebutton[2]{\ensuremath{\smash{\begin{aligned}\tikz{\node [#1] {#2};}\end{aligned}}}\xspace}
+\newcommand\fullheightbutton[2]{\ensuremath{{\begin{aligned}\tikz{\node [#1] {#2};}\end{aligned}}}\xspace}
+\newcommand\inlineM{\inlinebutton{M}{M}}
+\newcommand\inlineH{\inlinebutton{H}{H}}
+\newcommand\inlineP{\inlinebutton{P}{P}}
+\newcommand\inlineZ{\inlinebutton{Z}{Z}}
+\newcommand\inlineCZ{\inlinebutton{button, fill=white}{CZ}}
+\newcommand\fullheightM{\fullheightbutton{M}{M}}
+\newcommand\fullheightH{\fullheightbutton{H}{H}}
+\newcommand\fullheightP{\fullheightbutton{P}{P}}
+\newcommand\fullheightZ{\fullheightbutton{Z}{Z}}
+\newcommand\fullheightCZ{\fullheightbutton{button, fill=white}{CZ}}
 
+\newcommand\ignore[1]{}
+\setbeamertemplate{itemize item}{\raise0pt\hbox{\donotcoloroutermaths\color{black}$\bullet$}}
 \begin{document}
 
 {
@@ -70,54 +102,85 @@
 \setbeamertemplate{frametitle}{\color{black}\centering\Huge\bfseries\insertframetitle\par\vskip-6pt}
 
 \begin{frame}
-\frametitle{THE QUANTUM WORLD}
-- EVERYDAY WORLD = CLASSICAL, TINIEST THINGS BEHAVE DIFFERENTLY.\\
--....\\
-- WHAT CAN WE DO WITH THIS?
-\end{frame}
-\begin{frame}
 \frametitle{QUANTUM COMPUTERS}
 
-\begin{minipage}{0.5\textwidth}\raggedright
-Scientists around the world are racing to build the first \textit{quantum computer}.
-\end{minipage}
-\begin{minipage}{0.4\textwidth}\raggedright
-\includegraphics[height=3cm]{images/quantum_atom_in_room.png}
-\end{minipage}
 
-\vspace{15pt}
-Over the next 100 years, they will transform our civilization, giving us incredible new powers of ... DRUG DESIGN, OPTIMIZATION, DATA ANALYSIS, BREAKING ENCRYPTION, ARTIFICIAL INTELLIGENCE. [INSERT PICTURES FROM DALHOUSIE TALK.]
+\splitpage{0.4}{
+\uncover<1->{Scientists around the world are racing to build the first \textit{quantum computer}.}
 
-\vspace{15pt}
-Today we will investigate some of the basic principles of quantum computers.
+\vspace{0.5cm}
+\uncover<2->{These will give our civilization incredible new abilities to:}
+\begin{itemize}
+\uncover<2->{\item design drugs;}
+\uncover<3->{\item analyze data;}
+\uncover<4->{\item break encryption;}
+\uncover<5->{\item build artificial intelligences.}
+\end{itemize}
+}
+{
+\picturefamily{
+\uncover<1->{\node [anchor=north west] at (0,0) {\includegraphics[width=7cm]{images/quantum_atom_in_room}};}
+\uncover<2->{\node [anchor=north west] at (-0.5,-0.5) {\includegraphics[height=3cm]{images/free/drugs}};}
+\uncover<3->{\node [anchor=north] at (3.5,-1) {\includegraphics[height=3cm]{images/free/data}};}
+\uncover<4->{\node [anchor=north east] at (7.5,-1.5) {\includegraphics[height=3cm]{images/free/encryption}};}
+\uncover<5->{\node [anchor=north west] at (0.5,-2) {\includegraphics[height=3.5cm]{images/nonfree/friendly_robot}};}
+\uncover<6->{\node [anchor=north west] at (1,-2.5) {\includegraphics[height=4cm]{images/free/terminator}};}
+}}
 
 \end{frame}
+
+\begin{frame}
+\frametitle{THE QUANTUM WORLD}
+
+\splitpage{0.51}{
+\vspace{5pt}
+\uncover<3->{Atoms and electrons are some of the smallest things that exist.}
+
+\vspace{10pt}
+\uncover<4->{They obey the laws of \emph{quantum theory}--- mysterious, counterintuitive and surprising.}
+}
+{
+\picturefamily{
+\uncover<3->{\node [anchor=north] at (0,0) {\includegraphics[height=3cm]{images/quantum_particles}};}
+}}
+
+
+\vspace{20pt}
+
+
+Quantum objects can do lots of amazing things:
+\begin{itemize}
+\item \textit{Superposition}---be in two places at once.
+
+\item \textit{Entanglement}---separate objects with a strong connection.
+
+\item \textit{Teleportation}---jump straight from one place to another.
+\end{itemize}
+
+\vspace{10pt}
+Quantum computers will exploit these to perform their amazing tasks.
+
+\end{frame}
+
 
 \newcommand\col[2]{\begin{minipage}{#1\textwidth}\raggedright #2\end{minipage}}
 
 
-\begin{frame}
-\frametitle{QUANTUM COMPUTERS ARE STRANGE}
-- quantum mechanics is strange --> quantum computers are strange.\\
-- entanglement
--superposition\\
-- teleportation.
-\end{frame}
 \begin{frame}
 \frametitle{QUBITS}
 \vspace{25pt}
 \col{0.5}{
 Ordinary computers are built from \textit{bits}, which can equal 0 or 1.
 
-\vspace{25pt}
-Quantum computers will be built from \textit{qubits}. You've got one in front of you!
+\vgap\vgap
+Quantum computers will be built from \textit{qubits}. You've got one in front of you.
 
-\vspace{25pt}
+\vgap\vgap
 It has got lots of mysterious buttons.
 \\
-Give them a try.
+Give them a try!
 
-\vspace{25pt}
+\vgap\vgap
 We will use these buttons to tell the qubit what to do.
 }
 \col{0.4}{\includegraphics[height=6cm]{images/qubit_1.png}}
@@ -127,19 +190,54 @@ We will use these buttons to tell the qubit what to do.
 \begin{frame}
 \frametitle{SUPERPOSITION}
 
-In the everyday world, ...EITHER OR
+\vspace{10pt}
+\splitpage{0.55}
+{
+A famous example is Schr\"odinger's Cat.
 
 \vspace{20pt}
-Schr\"odinger's cat\\
+\textit{Simultaneously} dead \textit{and} alive ...
 
-M button = looking into schr\"odinger's box.
+\vspace{20pt}
+... but when we look, it's either dead \textit{or} alive.
 
-Measurement and collapse\\
+\vspace{20pt}
+`Looking' is called \textit{measurement}.
 
-Be clear: If you press H then M repeatedly, get any number that you want.
+It destroys the superposition.
+}
+{
+\picturefamily{
+\node at (0,0) {\includegraphics[height=6cm]{images/schrodingers_cat_wanted}};
+}
+}
+\end{frame}
+
+\begin{frame}
+\frametitle{SUPERPOSITION}
+
+\vspace{5pt}
+\textbf{Let's try it!}
+\begin{itemize}
+\vspace{10pt}
+\item \textit{Step 1.} Press \inlineM to measure at your qubit. It's  storing 0 or 1.
+
+\vspace{10pt}
+\item \textit{Step 2.} Press \inlineH to put your qubit into superposition. Now it's storing 0 \textit{and} 1.
+
+\vspace{10pt}
+\item \textit{Step 3.} Press \inlineM to measure at your qubit. You could get anything!
+\end{itemize}
+
+\vspace{20pt}
+Sometimes we will need to \textit{force} our qubit to store 0. 
+
+\vspace{10pt}
+We can do this by pressing \inlineH then \inlineM repeatedly, until we get 0.
 
 \end{frame}
 
+\ignore{
 \begin{frame}
 \frametitle{QUANTUM PROGRAMS}
 \vspace{25pt}
@@ -171,6 +269,7 @@ A \textit{quantum program} is a recipe which tells you which buttons have to be 
 \end{tikzpicture}
 \]
 \end{frame}
+}
 
 \begin{frame}
 \frametitle{ENTANGLEMENT}
@@ -178,6 +277,40 @@ Physics\\
 - spooky action, immediate 'faster than light'.\\
 -make it sound cool.
 \end{frame}
+
+\tikzset{cable/.style={snake}}
+
+\begin{frame}
+\frametitle{ENTANGLEMENT}
+
+\vspace{10pt}
+\textbf{Let's try it!} Get into pairs.
+\[
+\begin{tikzpicture}[xscale=3]
+\node at (0,-0.25) {\bf First Person};
+\node at (1,-0.25) {\bf Second Person};
+\node [H] at (0,-2) {H};
+\node [H] at (1,-2) {H};
+\draw [cable] (0,-3) node [miniCZ] {CZ} to (1,-3) node [miniCZ] {CZ};
+\node at (0,-1) {Store 0};
+\node at (1,-1) {Store 0};
+\node at (-0.75,-1) {\it Step 1.};
+\node at (-0.75,-2) {\it Step 2.};
+\node at (-0.75,-3) {\it Step 3.};
+\node at (-0.75,-4) {\it Step 4.};
+\node [H] at (0,-4) {H};
+\end{tikzpicture}
+\]
+
+\vspace{5pt}
+Disconnect the cable. Your qubits are now entangled.
+
+\vspace{10pt}
+Now both press \inlineM. You should get the \textit{same result}!
+
+\end{frame}
+
+\ignore{
 \begin{frame}
 \frametitle{ENTANGLEMENT}
 
@@ -192,12 +325,12 @@ Get into pairs and entangle your qubits: }
 \vspace{10pt}
 
 \[ \begin{tikzpicture}[xscale=2]
-\draw[string] (-0.5,0) to + (4,0);
-\draw[string] (-0.5,1.5) to + (4,0);
+\draw[string] (0.5,0) to +(3,0);
+\draw[string] (0.5,1.5) to + (3,0);
 \node[H] at (1,0) {H};
 \node[H] at (1,1.5) {H};
 \node[H] at (3,0){H};
-\path (0,1.5) node [M] {M} node [result] {0};
+%\path (0,1.5) node [M] {M} node [result] {0};
 \path (0,0) node [M] {M} node [result] {0};
 \node[CZ={1.5}] at (2,0.75) {CZ};
 \end{tikzpicture}
@@ -208,6 +341,7 @@ Get into pairs and entangle your qubits: }
 %Make clear that if you do anything with the qubits after you've measured them, the entanglement is broken.
 
 \end{frame}
+}
 
 \begin{frame}
 \frametitle{DENSE CODING}
@@ -293,6 +427,90 @@ The sender secretly chooses a first number (0 or 1), and a second number (0 or 1
 - perfectly send stuff.\\
 
 \end{frame}
+
+\begin{frame}
+\frametitle{TELEPORTATION}
+
+\vspace{10pt}
+\textbf{Let's try it!} Get into threes, called Alice, Bob and Charlie.
+
+\vspace{10pt}
+\textit{Step 1.} Bob and Charlie, entangle your qubits!
+
+\vspace{10pt}
+\textit{Step 2.} Alice, mash the buttons on your qubit. Press \inlineM to get your \textit{secret number}.
+
+\vspace{10pt}
+%We are going to \textit{teleport} this secret number to Charlie!
+
+\textit{Step 3.} Alice and Bob, connect a cable, and both press \inlineCZ.
+
+\vspace{10pt}
+\textit{Step 4.} Bob, press \inlineH then \inlineM. If the answer is 1, then Charlie press \inlineZ.
+
+\vspace{10pt}
+\textit{Step 5.} Charlie, press \inlineH.
+
+\vspace{10pt}
+\textit{Step 6.} Alice, press \inlineH then \inlineM. If the answer is 1, then Charlie press \inlineZ.
+
+\vspace{10pt}
+\textit{Step 7.} Charlie, press \inlineM to get \textit{Alice's secret number!}
+
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{TELEPORTATION}
+
+\textit{Step 3.} Alice and Bob, connect a cable, and both press \inlineCZ.
+
+\vspace{15pt}
+\textit{Step 4.} Bob, press \inlineH then \inlineM. If the answer is 1, then Charlie press \inlineZ.
+
+\vspace{15pt}
+\textit{Step 5.} Charlie, press \inlineH.
+
+\vspace{15pt}
+\textit{Step 6.} Alice, press \inlineH then \inlineM. If the answer is 1, then Charlie press \inlineZ.
+
+\vspace{15pt}
+\textit{Step 7.} Charlie, press \inlineM to get \textit{Alice's secret number!}
+
+
+\end{frame}
+
+
+\begin{frame}
+
+\frametitle{TELEPORATION}
+
+\[
+\begin{tikzpicture}[xscale=4]
+\node at (0,-0.5) {\bf Alice};
+\node at (1,-0.5) {\bf Bob};
+\node at (2,-0.5) {\bf Charlie};
+\node at (0,-2.5) {\inlineH};
+\node at (1,-2.5) {\inlineH};
+\draw [cable] (0,-1.5) node [miniCZ] {CZ} to +(1,0) node [miniCZ] {CZ};
+\node at (-0.75,-1.5) {\it Step 4.};
+\node at (-0.75,-2.5) {\it Step 5.};
+\node at (-0.75,-3.5) {\it Step 6.};
+\node [align=center] at (0,-3.5) {Press \inlineM to get\\\textit{Alice's number}};
+\node [align=center] at (1,-3.5) {Press \inlineM to get\\\textit{Bob's number}};
+\node at (-0.75,-4.5) {\it Step 7.};
+\node [align=center] at (2,-4.5) {Press \inlineZ if\\Alice's number was 1};
+\node at (-0.75,-5.5) {\it Step 8.};
+\node at (-0.75,-6.5) {\it Step 9.};
+\end{tikzpicture}
+\]
+
+\end{frame}
+
+
+
+
 \begin{frame}
 \frametitle{TELEPORTATION}
 
