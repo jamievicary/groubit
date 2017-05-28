@@ -14,6 +14,9 @@
 \setbeamercovered{invisible}
 \usenavigationsymbolstemplate{}
 
+%\newcommand\step[1]{\textit{Step #1.}}
+\newcommand\step[1]{\tikz[anchor=base, baseline]{\node [draw, circle, inner sep=0pt, minimum width=13pt, fill=black!10] at (0,0) {#1};}}
+
 \newlength\pw
 \setlength\pw{16cm}
 \newlength\rw
@@ -444,8 +447,6 @@ Could you send your friend \emph{two numbers} by passing them one qubit?
 
 \end{frame}
 
-%\newcommand\step[1]{\textit{Step #1.}}
-\newcommand\step[1]{\tikz[anchor=base, baseline]{\node [draw, circle, inner sep=0pt, minimum width=13pt, fill=black!10] at (0,0) {#1};}}
 
 \begin{frame}
 \frametitle{SENDING INFORMATION}
@@ -629,27 +630,27 @@ Quantum computers will need to move qubits around inside them.
 \textbf{Let's try it!} Get into threes called Alice, Bob and Charlie.
 
 \vspace{10pt}\pause
-\textit{Step 1.} Bob and Charlie, entangle your qubits!
+\step 1 Alice and Bob, entangle your qubits!
 
 \vspace{10pt}\pause
-\textit{Step 2.} Alice, press random buttons, then press \inlineM to get your \textit{secret number}.
+\step 2 Charlie, press random buttons, then press \inlineM to get your \textit{secret number}.
 
 \vspace{10pt}\pause
-\textit{Step 3.} Alice and Bob, connect a cable, and both press \inlineCZ.
+\step 3 Bob and Charlie, connect a cable, and both press \inlineCZ.
 
 \vspace{10pt}\pause
-\textit{Step 4.} Bob, press \inlineH then \inlineM. If the answer is 1, then Charlie press \inlineZ.
+\step 4 Bob, press \inlineH then \inlineM. If the answer is 1, then Alice press \inlineZ.
 
 \vspace{10pt}\pause
-\textit{Step 5.} Charlie, press \inlineH.
+\step 5 Alice, press \inlineH.
 
 \vgap\pause
-{\bf Alice's qubit has now been teleported to Charlie!}
+{\bf Charlie's qubit has now been teleported to Alice!}
 
 %\vspace{10pt} \textit{Step 6.} Alice, press \inlineH then \inlineM. If the answer is 1, then Charlie press \inlineZ.
 
 \vspace{10pt}\pause
-\textit{Step 6.} Charlie, press \inlineM to discover {Alice's secret number.}
+\step 6 Alice, press \inlineM to discover {Charlie's secret number.}
 
 \end{frame}
 
@@ -793,8 +794,10 @@ Real quantum computers don't exist yet. \pause Here's a plan for one we're build
 Each of the little octagons will hold 20 qubits, giving the whole computer 400 qubits.
 
 \vgap
-We want to create \textit{large-scale} entanglement and superposition, with quantum effects taking place across the whole computer at once.
+We want to create entanglement and superposition across the \textit{whole computer}.
 
+\vgap
+It's hard because \textit{errors} can easily accumulate.
 
 \end{frame}
 
@@ -838,7 +841,7 @@ Everybody, press \inlineM to measure your qubit!
 \frametitle{THE END}
 
 \[
-\includegraphics[height=6cm]{images/oxhack}
+\includegraphics[height=6cm]{images/paid/quantum_small_transparent}
 \]
 
 \Huge\centering
