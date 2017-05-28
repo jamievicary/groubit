@@ -210,8 +210,11 @@ void CZ_down(uint8_t left) {
       break;
     }
   }
+  Write(TX,HIGH);
+  while(Read(button_CZ)==LOW){
+    delay_ms(50);
+  }
 
-  Write(TX, HIGH);
   Write(LED_act, LOW);
 }
 
