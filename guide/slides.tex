@@ -9,6 +9,7 @@
 \usepackage{calc}
 
 \usetikzlibrary{decorations.pathreplacing,decorations.markings,snakes}
+\usetikzlibrary{shapes.symbols}
 
 \setbeamercovered{invisible}
 \usenavigationsymbolstemplate{}
@@ -94,7 +95,7 @@
 \addtocounter{framenumber}{-1}
 
 \usebackgroundtemplate{$\begin{tikzpicture}[xscale=1.2, yscale=1.8]
-\foreach \x/\y/\z in {0/red/10,1/orange/13,2/yellow/14,3/green/10,4/blue/10} {
+\foreach \x/\y/\z in {0/red/15,1/orange/16,2/yellow/17,3/green/13,4/blue/13} {
   \path [fill=\y!\z] (0,\x) rectangle +(\textwidth,1);
 }
 \end{tikzpicture}$}
@@ -419,7 +420,7 @@ Get into pairs and entangle your qubits: }
 \begin{frame}
 \frametitle{SENDING INFORMATION}
 
-NEED A PICTURE. SAY: ``QUANTUM COMPUTERS WILL NEED TO TRANSFER ORDINARY BITS''
+%NEED A PICTURE. SAY: ``QUANTUM COMPUTERS WILL NEED TO TRANSFER ORDINARY BITS''
 
 Imagine you wanted to send your friend a ``0'' or a ``1''.
 
@@ -435,7 +436,7 @@ Then pass the qubit to your friend.
 \vspace{7pt}
 They can press \inlineM to discover the message.
 
-\vspace{25pt}
+\vspace{7pt}
 \textbf{Let's try it!}
 
 \vspace{20pt}
@@ -443,14 +444,108 @@ Could you send your friend \emph{two numbers} by passing them one qubit?
 
 \end{frame}
 
+%\newcommand\step[1]{\textit{Step #1.}}
+\newcommand\step[1]{\tikz[anchor=base, baseline]{\node [draw, circle, inner sep=0pt, minimum width=13pt, fill=black!10] at (0,0) {#1};}}
+
 \begin{frame}
 \frametitle{SENDING INFORMATION}
 
-\textbf{Let's try it!} Get into threes called Alice, Bob and Charlie.
+\def\gap{10pt}
+
+\textbf{Let's try it!} Get into pairs called Alice and Bob.
+
+\vgap
+\step 1 Entangle your qubits
+
+\vgap
+
+\begin{minipage}[t]{0.5\textwidth}
+\textit{Alice's program:}
+
+\vgap
+\step 2 Secretly choose a \textit{first number} and\\\textit{second number}, each either 0 or~1
+
+\vgap
+\step 3 Press \inlineZ if your first number is~1
+
+\vgap
+\step 4 Press \inlineH
+
+\vgap
+\step 5 Press \inlineZ if your second number is~1
+
+\vgap
+\step 6 Give your qubit to Bob
+
+\end{minipage}
+\begin{minipage}[t]{0.471\textwidth}
+\textit{Bob's program:}
+
+\vgap
+\step 7 Do \inlineCZ on both qubits
+
+\vgap
+\step 8 Press \inlineH separately on both qubits
+
+\vgap
+\step 9 Measure your original qubit.\\This gives Alice's \textit{first number!}
+
+\vgap
+\step {10} Measure Alice's qubit.\\This gives Alice's \textit{second number!}
+\end{minipage}
+
 \end{frame}
+
+\begin{frame}
+\frametitle{SENDING INFORMATION}
+
+\def\gap{7pt}
+
+\begin{minipage}{0.59\textwidth}
+\raggedright
+
+It seems like sending a qubit should transmit a \mbox{\textit{single number}.\hspace{-5cm}}
+
+\vgap
+But using entanglement, it can transmit \mbox{\textit{two numbers}.\hspace{-5cm}}
+
+\vgap
+\textit{How is this possible?}
+
+\vgap
+This picture represents our quantum program.
+
+\vgap
+One number gets transmitted when Alice passes her qubit to Bob.
+
+\vgap
+Some scientists have suggested the other number travels \textit{back in time}, through the entangled state.
+
+\vgap
+Probably not true. But it shows the difficult time scientists have understanding quantum computing.
+
+\end{minipage}
+\begin{minipage}{0.39\textwidth}
+\[
+\begin{tikzpicture}
+\draw [ultra thick] (0,0) to [out=left, in=down] (-2,2) to [out=up, in=down] (1,5);
+\draw [ultra thick] (0,0) to [out=right, in=down] (2,2) to (2,5);
+\node[starburst, draw, minimum width=3cm, minimum height=2cm, red, fill=orange, line width=1.5pt, text=black]
+{Entanglement!};
+\node at (-1.5,3.7) {Alice};
+\node at (1.25,3.7) {Bob};
+\draw [blue, ultra thick, ->] (-1.8,2.1) to [out=up, in=down, out looseness=0.8, in looseness=1.1] (1.2,5);
+\draw [blue, ultra thick, ->] (-1.8,1.9) to [out=down, in=down, looseness=1.55] (1.8,2) to (1.8,5);
+\end{tikzpicture}
+\]
+\end{minipage}
+
+\end{frame}
+
 
 \tikzset{top note/.style={align=center, above=0.35cm, font=\it}}
 
+\ignore{
 \begin{frame}
 \frametitle{SENDING NUMBERS}
 \begin{columns}[t]
@@ -495,6 +590,7 @@ The sender secretly chooses a first number (0 or 1), and a second number (0 or 1
 \vspace{-1cm}
 
 \end{frame}
+}
 
 \begin{frame}
 \frametitle{TELEPORTATION}
