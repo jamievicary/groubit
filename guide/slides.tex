@@ -1,6 +1,6 @@
 %
 
-\documentclass[handout,aspectratio=169]{beamer}
+\documentclass[aspectratio=169]{beamer}
 
 \usepackage{tikz}
 \usepackage{xspace}
@@ -27,7 +27,8 @@
     \raggedright #3
 \end{minipage}
 }
-\newcommand\vgap{\vspace{5pt}}
+\def\gap{5pt}
+\def\vgap{\vspace{\gap}}
 
 \makeatletter
 \setbeamertemplate{footline}
@@ -114,8 +115,11 @@
 \uncover<2->{\item design drugs;}
 \uncover<3->{\item analyze data;}
 \uncover<4->{\item break encryption;}
-\uncover<5->{\item build artificial intelligences.}
+\uncover<5->{\item build intelligent robots.}
 \end{itemize}
+
+\vspace{0.5cm}
+\uncover<7->{But what are the \textit{fundamental ideas} that underlie quantum computers?}
 }
 {
 \picturefamily{
@@ -124,7 +128,7 @@
 \uncover<3->{\node [anchor=north] at (3.5,-1) {\includegraphics[height=3cm]{images/free/data}};}
 \uncover<4->{\node [anchor=north east] at (7.5,-1.5) {\includegraphics[height=3cm]{images/free/encryption}};}
 \uncover<5->{\node [anchor=north west] at (0.5,-2) {\includegraphics[height=3.5cm]{images/nonfree/friendly_robot}};}
-\uncover<6->{\node [anchor=north west] at (1,-2.5) {\includegraphics[height=4cm]{images/free/terminator}};}
+\uncover<6->{\node [anchor=north west] at (1,-2.5) {\includegraphics[height=4cm]{images/terminator}};}
 }}
 
 \end{frame}
@@ -134,29 +138,31 @@
 
 \splitpage{0.51}{
 \vspace{5pt}
-\uncover<3->{Atoms and electrons are some of the smallest things that exist.}
+\uncover<1->{Atoms and electrons are some of the smallest things that exist.}
 
 \vspace{10pt}
-\uncover<4->{They obey the laws of \emph{quantum theory}--- mysterious, counterintuitive and surprising.}
+\uncover<2->{They obey the laws of \emph{quantum theory}--- mysterious, counterintuitive and surprising.}
 }
 {
 \picturefamily{
-\uncover<3->{\node [anchor=north] at (0,0) {\includegraphics[height=3cm]{images/quantum_particles}};}
+\uncover<1->{\node [anchor=north] at (0,0) {\includegraphics[height=3cm]{images/quantum_particles}};}
 }}
 
 
 \vspace{20pt}
 
-
+\pause\pause
 Quantum objects can do lots of amazing things:
 \begin{itemize}
+\pause
 \item \textit{Superposition}---be in two places at once.
 
-\item \textit{Entanglement}---separate objects with a strong connection.
+\pause\item \textit{Entanglement}---different objects that behave in exactly the same way.
 
-\item \textit{Teleportation}---jump straight from one place to another.
+\pause\item \textit{Teleportation}---jump straight from one place to another.
 \end{itemize}
 
+\pause
 \vspace{10pt}
 Quantum computers will exploit these to perform their amazing tasks.
 
@@ -168,20 +174,28 @@ Quantum computers will exploit these to perform their amazing tasks.
 
 \begin{frame}
 \frametitle{QUBITS}
-\vspace{25pt}
+
+\def\gap{10pt}
+\vspace{15pt}
 \col{0.5}{
 Ordinary computers are built from \textit{bits}, which can equal 0 or 1.
 
-\vgap\vgap
-Quantum computers will be built from \textit{qubits}. You've got one in front of you.
+\vgap
+\uncover<2->{
+Quantum computers will be built from \textit{qubits}. You've got one in front of you.*}
 
-\vgap\vgap
-It has got lots of mysterious buttons.
+\vgap
+\uncover<3->{It has got lots of mysterious buttons.
 \\
-Give them a try!
+Give them a try!}
 
-\vgap\vgap
-We will use these buttons to tell the qubit what to do.
+\vgap
+\uncover<4->{
+We will use these qubits to investigate the properties of quantum computers.}
+
+\vgap
+\uncover<2->{
+\scriptsize * Just a \textit{simulated} qubit unfortunately :(.}
 }
 \col{0.4}{\includegraphics[height=6cm]{images/qubit_1.png}}
 
@@ -195,16 +209,17 @@ We will use these buttons to tell the qubit what to do.
 {
 A famous example is Schr\"odinger's Cat.
 
-\vspace{20pt}
-\textit{Simultaneously} dead \textit{and} alive ...
+\def\gap{15pt}
+\vgap
+\uncover<2->{Simultaneously dead \textit{and} alive ...}
 
-\vspace{20pt}
-... but when we look, it's either dead \textit{or} alive.
+\vgap
+\uncover<3->{... but when we look, it's either dead \textit{or} alive.}
 
-\vspace{20pt}
-`Looking' is called \textit{measurement}.
+\vgap
+\uncover<4->{Scientists call this \textit{measurement}.
 
-It destroys the superposition.
+It destroys the superposition.}
 }
 {
 \picturefamily{
@@ -213,27 +228,28 @@ It destroys the superposition.
 }
 \end{frame}
 
+\def\gap{10pt}
+
 \begin{frame}
 \frametitle{SUPERPOSITION}
 
-\vspace{5pt}
 \textbf{Let's try it!}
-\begin{itemize}
-\vspace{10pt}
-\item \textit{Step 1.} Press \inlineM to measure at your qubit. It's  storing 0 or 1.
 
-\vspace{10pt}
-\item \textit{Step 2.} Press \inlineH to put your qubit into superposition. Now it's storing 0 \textit{and} 1.
+\vgap\pause
+\textit{Step 1.} Press \inlineM to measure at your qubit. It's  storing 0 or 1.
 
-\vspace{10pt}
-\item \textit{Step 3.} Press \inlineM to measure at your qubit. You could get anything!
-\end{itemize}
+\vgap\pause
+\textit{Step 2.} Press \inlineH to put your qubit into superposition. Now it's storing 0 \textit{and} 1.
 
-\vspace{20pt}
-Sometimes we will need to \textit{force} our qubit to store 0. 
+\vgap\pause
+\textit{Step 3.} Press \inlineM to measure at your qubit. The superposition has collapsed!
 
-\vspace{10pt}
-We can do this by pressing \inlineH then \inlineM repeatedly, until we get 0.
+\vspace{30pt}
+\pause
+Sometimes we will need to \textit{force} a qubit to store 0. 
+
+\vgap\pause
+Do this by pressing \inlineH then \inlineM repeatedly, until you get 0.
 
 \end{frame}
 
@@ -273,9 +289,42 @@ A \textit{quantum program} is a recipe which tells you which buttons have to be 
 
 \begin{frame}
 \frametitle{ENTANGLEMENT}
-Physics\\
-- spooky action, immediate 'faster than light'.\\
--make it sound cool.
+
+\def\gap{5pt}
+
+\vspace{10pt}
+
+\splitpage{0.5}{
+Two quantum systems can sometimes become strongly connected, even if they are far apart.
+
+\vgap\uncover<2->{
+This is called \textit{entanglement}.}
+
+\vgap\uncover<3->{
+Although individually each system is unpredictable, they will copy each other exactly.}
+}{
+\raggedright
+$\begin{aligned}
+\tikz{\node at (0,0) {\includegraphics[height=2.7cm]{images/nonfree/entangled}};}
+\end{aligned}$
+}
+
+\splitpage{0.53}{
+\uncover<4->{Einstein hated quantum entanglement.}
+
+\vgap\uncover<5->{He thought it was ``spooky'', and showed that quantum mechanics wasn't a \textit{complete} theory.}
+
+\vgap
+\uncover<6->{He was wrong! Silly Einstein.}
+}{
+\hspace{2cm}
+\begin{tikzpicture}
+\uncover<4->{\node at (0,0) {\includegraphics[height=3.5cm]{images/einstein}};}
+\uncover<5->{\node at (0.5,-0.25) {\includegraphics[height=3.5cm]{images/free/nyt_1935}};}
+\uncover<6->{\node at (1,-0.5) {\includegraphics[height=3.5cm]{images/einstein_silly}};}
+\end{tikzpicture}
+}
+
 \end{frame}
 
 \tikzset{cable/.style={snake}}
@@ -283,23 +332,26 @@ Physics\\
 \begin{frame}
 \frametitle{ENTANGLEMENT}
 
-\vspace{10pt}
 \textbf{Let's try it!} Get into pairs called Alice and Bob.
 
-\vspace{15pt}
+\vgap\pause
 \textit{Step 1.} Alice and Bob, both store 0 in your qubits.
 
-\vspace{15pt}
+\vgap\pause
 \textit{Step 2.} Alice and Bob, connect a cable and both press \inlineCZ. Remove the cable.
 
-\vspace{15pt}
-\textit{Step 3.} Alice, press \inlineH. {\bf The qubits are now entangled.}
+\vgap\pause
+\textit{Step 3.} Alice, press \inlineH.
 
-\vspace{15pt}
+\vgap\pause
+{\bf The qubits are now entangled.}
+
+\vgap\pause
 \textit{Step 4.} Alice and Bob, both press \inlineM. {\bf You should get the \textit{same result!}}
 
 \end{frame}
 
+\ignore{
 \begin{frame}
 \frametitle{ENTANGLEMENT}
 
@@ -329,6 +381,7 @@ Disconnect the cable. Your qubits are now entangled.
 Now both press \inlineM. You should get the \textit{same result}!
 
 \end{frame}
+}
 
 \ignore{
 \begin{frame}
@@ -363,10 +416,7 @@ Get into pairs and entangle your qubits: }
 \end{frame}
 }
 
-\begin{frame}
-\frametitle{DENSE CODING}
-\end{frame}
-
+\ignore{
 \begin{frame}
 \frametitle{SENDING NUMBERS}
 
@@ -438,13 +488,35 @@ The sender secretly chooses a first number (0 or 1), and a second number (0 or 1
 \vspace{-1cm}
 
 \end{frame}
+}
 
 \begin{frame}
-\frametitle{TELEPORTATION IS COOL}
-- entangelemet: Magically one qubit knows everything about another qubit/\\
-- exciting story.
-- Star Trek\\
-- perfectly send stuff.\\
+\frametitle{TELEPORTATION}
+
+\splitpage{0.45}{
+Quantum computers will need to move qubits around inside them.
+
+\vgap
+\uncover<2->{One of the most powerful ways to do this is called \textit{teleportation}.}
+}
+{
+\[\begin{aligned}\begin{tikzpicture}
+\node at (0,0) {\includegraphics[height=3cm]{images/photoniccomputer}};
+\end{tikzpicture}\end{aligned}\]
+}
+
+\splitpage{0.45}{
+\uncover<3->{This uses \textit{entanglement} to move a qubit from one place to another.}
+
+\vgap
+\uncover<4->{It's not really what you're thinking of...}
+
+\uncover<4->{but in the future, who knows?}
+}{
+\[\begin{aligned}\begin{tikzpicture}
+\uncover<4->{\node at (0,0) {\includegraphics[height=3cm]{images/teleportation}};}
+\end{tikzpicture}\end{aligned}\]
+}
 
 \end{frame}
 
@@ -454,33 +526,32 @@ The sender secretly chooses a first number (0 or 1), and a second number (0 or 1
 \vspace{10pt}
 \textbf{Let's try it!} Get into threes called Alice, Bob and Charlie.
 
-\vspace{10pt}
+\vspace{10pt}\pause
 \textit{Step 1.} Bob and Charlie, entangle your qubits!
 
-\vspace{10pt}
-\textit{Step 2.} Alice, mash the buttons on your qubit. Press \inlineM to get your \textit{secret number}.
+\vspace{10pt}\pause
+\textit{Step 2.} Alice, press random buttons, then press \inlineM to get your \textit{secret number}.
 
-\vspace{10pt}
-%We are going to \textit{teleport} this secret number to Charlie!
-
+\vspace{10pt}\pause
 \textit{Step 3.} Alice and Bob, connect a cable, and both press \inlineCZ.
 
-\vspace{10pt}
+\vspace{10pt}\pause
 \textit{Step 4.} Bob, press \inlineH then \inlineM. If the answer is 1, then Charlie press \inlineZ.
 
-\vspace{10pt}
+\vspace{10pt}\pause
 \textit{Step 5.} Charlie, press \inlineH.
 
-\vspace{10pt}
-\textit{Step 6.} Alice, press \inlineH then \inlineM. If the answer is 1, then Charlie press \inlineZ.
+\vgap\pause
+{\bf Alice's qubit has now been teleported to Charlie!}
 
-\vspace{10pt}
-\textit{Step 7.} Charlie, press \inlineM to get \textit{Alice's secret number!}
+%\vspace{10pt} \textit{Step 6.} Alice, press \inlineH then \inlineM. If the answer is 1, then Charlie press \inlineZ.
 
-
+\vspace{10pt}\pause
+\textit{Step 6.} Charlie, press \inlineM to discover {Alice's secret number.}
 
 \end{frame}
 
+\ignore{
 \begin{frame}
 \frametitle{TELEPORTATION}
 
@@ -498,13 +569,13 @@ The sender secretly chooses a first number (0 or 1), and a second number (0 or 1
 \vspace{15pt}
 \textit{Step 7.} Charlie, press \inlineM to get \textit{Alice's secret number!}
 
-
 \end{frame}
+}
 
-
+\ignore{
 \begin{frame}
 
-\frametitle{TELEPORATION}
+\frametitle{TELEPORTATION}
 
 \[
 \begin{tikzpicture}[xscale=4]
@@ -527,10 +598,9 @@ The sender secretly chooses a first number (0 or 1), and a second number (0 or 1
 \]
 
 \end{frame}
+}
 
-
-
-
+\ignore{
 \begin{frame}
 \frametitle{TELEPORTATION}
 
@@ -566,7 +636,9 @@ Get into pairs and entangle your qubits. \\
 \]
 
 \end{frame}
+}
 
+\ignore{
 \begin{frame}
 \frametitle{GHZ?}
 
@@ -603,11 +675,73 @@ Get into pairs and entangle your qubits. \\
 \end{tikzpicture}
 \]
 \end{frame}
+}
+
+\begin{frame}
+\frametitle{REAL QUANTUM COMPUTERS}
+
+Real quantum computers don't exist yet. \pause Here's a plan for one we're building in Oxford:
+
+\vspace{-5pt}
+\[
+\includegraphics[height=4cm]{images/free/oxford_2020}
+\]
+
+\vspace{-5pt}\pause
+Each of the little octagons will hold 20 qubits, giving the whole computer 400 qubits.
+
+\vgap
+We want to create \textit{large-scale} entanglement and superposition, with quantum effects taking place across the whole computer at once.
+
+
+\end{frame}
 
 
 \begin{frame}
-\frametitle{That's what a quantum computer is!}
--maybe big composed circuit.
+\frametitle{REAL QUANTUM COMPUTERS}
+
+\def\gap{7pt}
+\textbf{Let's try it!} We'll do this challenge individually.
+
+\vgap\pause
+\textit{Step 1.} Everybody, store 0 in your qubit.
+
+\vgap\pause
+\textit{Step 2.} Everybody, press \inlineH.
+
+\vgap\pause
+\textit{Step 3.} Arrange your qubits in a single line, connected by cables.
+
+\vgap\pause
+\textit{Step 4.} First and second qubits press \inlineCZ, then the second qubit press \inlineH.
+
+\vgap\pause
+\textit{Step 5.} Second and third qubits press \inlineCZ, then the third qubit press \inlineH.
+
+\vspace{0pt}
+\hspace{2cm}\vdots
+
+\vspace{3pt}\pause
+\textit{Final Step.} Last two qubits press \inlineCZ, then last qubit press \inlineH.
+
+\vgap\pause
+{\bf Now everybody's qubits are entangled, and in superposition.}
+
+\vgap\pause
+Everybody, press \inlineM to measure your qubit!
+
+\end{frame}
+
+\begin{frame}
+\frametitle{THE END}
+
+\[
+\includegraphics[height=6cm]{images/oxhack}
+\]
+
+\Huge\centering
+Thank you OxHack!
+
 \end{frame}
 
 
