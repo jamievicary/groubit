@@ -1,0 +1,67 @@
+%
+
+\documentclass[a4paper]{article}
+
+\usepackage{tikz}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{calc}
+\usepackage[]{geometry}
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings,snakes}
+\usetikzlibrary{shapes.symbols}
+
+%\newcommand\step[1]{\textit{Step #1.}}
+\newcommand\step[1]{\tikz[anchor=base, baseline]{\node [draw, circle, inner sep=0pt, minimum width=13pt, fill=black!10, thick] at (0,0) {#1};}}
+
+\newlength\pw
+\setlength\pw{16cm}
+\newlength\rw
+\newlength\lw
+\newcommand\splitpage[3]{
+\begin{minipage}{#1\pw}
+    \raggedright #2
+\end{minipage}
+\setlength\lw{#1\pw}
+\setlength\rw{13cm-\lw}
+\begin{minipage}{\rw}
+    \raggedright #3
+\end{minipage}
+}
+\def\gap{5pt}
+\def\vgap{\vspace{\gap}}
+
+\tikzset{string/.style={line width=0.7pt}}
+\tikzset{button/.style={draw, line width=0.7pt, minimum height=0.6cm, minimum width=0.6cm, inner sep=0pt}}
+\tikzset{M/.style={button, fill=red!70}}
+\definecolor{myblue}{rgb}{0.1,0.5,1}
+\tikzset{H/.style={button, fill=myblue}}
+\tikzset{P/.style={button, fill=black,text=white}}
+\tikzset{Z/.style={button, fill=green!95!black}}
+\tikzset{miniCZ/.style={button, fill=white}}
+\tikzset{CZ/.style args={#1}{button, fill=white, minimum height=#1cm+0.6cm }}
+\tikzset{result/.style={red, above=0.24cm}}
+\newcommand\inlinebutton[2]{\ensuremath{\smash{\begin{aligned}\tikz{\node [#1] {#2};}\end{aligned}}}\xspace}
+\newcommand\fullheightbutton[2]{\ensuremath{{\begin{aligned}\tikz{\node [#1] {#2};}\end{aligned}}}\xspace}
+\newcommand\inlineM{\inlinebutton{M}{M}}
+\newcommand\inlineH{\inlinebutton{H}{H}}
+\newcommand\inlineP{\inlinebutton{P}{P}}
+\newcommand\inlineZ{\inlinebutton{Z}{Z}}
+\newcommand\inlineCZ{\inlinebutton{button, fill=white}{CZ}}
+\newcommand\fullheightM{\fullheightbutton{M}{M}}
+\newcommand\fullheightH{\fullheightbutton{H}{H}}
+\newcommand\fullheightP{\fullheightbutton{P}{P}}
+\newcommand\fullheightZ{\fullheightbutton{Z}{Z}}
+\newcommand\fullheightCZ{\fullheightbutton{button, fill=white}{CZ}}
+
+\newcommand\ignore[1]{}
+
+\begin{document}
+
+\begin{center}
+\bf\Huge
+Try Some Quantum Protocols
+\end{center}
+
+\end{document}
